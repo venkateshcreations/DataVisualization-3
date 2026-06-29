@@ -1,0 +1,23 @@
+[
+  {"source":"Steel","target":"China Plant","value":1200},
+  {"source":"Aluminum","target":"China Plant","value":900},
+  {"source":"Copper","target":"India Plant","value":850},
+
+  {"source":"Semiconductors","target":"Vietnam Plant","value":1400},
+  {"source":"Sensors","target":"Vietnam Plant","value":1000},
+  {"source":"Circuit Boards","target":"Mexico Plant","value":1100},
+
+  {"source":"China Plant","target":"Singapore DC","value":1800},
+  {"source":"India Plant","target":"Dubai DC","value":1600},
+  {"source":"Vietnam Plant","target":"Singapore DC","value":2200},
+  {"source":"Mexico Plant","target":"Chicago DC","value":1700},
+
+  {"source":"Singapore DC","target":"Asia Warehouse","value":3500},
+  {"source":"Dubai DC","target":"Europe Warehouse","value":2200},
+  {"source":"Rotterdam DC","target":"Europe Warehouse","value":3100},
+  {"source":"Chicago DC","target":"North America Warehouse","value":2800},
+
+  {"source":"Asia Warehouse","target":"Store Network Asia","value":3200},
+  {"source":"Europe Warehouse","target":"Store Network Europe","value":4700},
+  {"source":"North America Warehouse","target":"Store Network US","value":2600}
+]

@@ -1,0 +1,42 @@
+[
+  {
+    "id": "INC-001",
+    "title": "Shanghai Port Congestion",
+    "type": "Logistics",
+    "severity": "High",
+    "location": "Shanghai",
+    "coordinates": [121.4737, 31.2304],
+    "impact": "48h delays on outbound Asia shipping",
+    "status": "Active"
+  },
+  {
+    "id": "INC-002",
+    "title": "Suez Canal Slowdown",
+    "type": "Transit",
+    "severity": "Medium",
+    "location": "Suez",
+    "coordinates": [32.31, 30.58],
+    "impact": "12h delay on Asia-Europe route",
+    "status": "Monitoring"
+  },
+  {
+    "id": "INC-003",
+    "title": "Copper Supply Shortage",
+    "type": "Raw Material",
+    "severity": "Critical",
+    "location": "Santiago",
+    "coordinates": [-70.6693, -33.4489],
+    "impact": "15% reduction in copper supply capacity",
+    "status": "Active"
+  },
+  {
+    "id": "INC-004",
+    "title": "Mexico Plant Power Outage",
+    "type": "Manufacturing",
+    "severity": "Low",
+    "location": "Monterrey",
+    "coordinates": [-100.3161, 25.6866],
+    "impact": "4h production halt, resolved",
+    "status": "Resolved"
+  }
+]

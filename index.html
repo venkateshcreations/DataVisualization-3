@@ -1,0 +1,1876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GEC — Global Supply Chain Analytics Dashboard</title>
+  <meta name="description"
+        content="Venkatesh Ammireddy is a UX Creative Director and AI-first Product UX Architect with 13+ years of experience designing enterprise platforms, AI systems, agentic UX workflows, and intelligent digital products." />
+    <meta name="keywords"
+        content="Venkatesh Ammireddy, UX Designer, UX Creative Director, AI UX Designer, Product UX Architect, Agentic AI UX, Enterprise UX, UI UX Portfolio, Frontend Designer, AI Product Design, UX India, UX Consultant, Human-AI Interaction, Agentic UI, UX Architecture, Enterprise Platform Design, Design Systems Leader, Cognitive UX, Conversational AI UX, SaaS UX Design, UX Strategy Consultant, Product Design Director, Figma Design System, Venkatesh Creations Portfolio, Senior UX Designer India, AI UI Design, UX Architect Venkatesh, Ammireddy UX Lead Architect, Venkatesh Ammireddy UX Creative Director, Creative UX Ammireddy, Ammireddy Venkatesh UX, Venkatesh Ammireddy Designer, Venkatesh Ammireddy UX Contractor, Independent UX Director, Independent Design Director, UX Venkatesh, UX Ammireddy, UX Director, AI-UX Ammireddy, UX Consultant Hyderabad, AI UX Architect India, Venkatesh Creations UX" />
+    <meta name="author" content="Venkatesh Ammireddy" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="English" />
+    <meta name="revisit-after" content="7 days" />
+    <meta name="linkedin:owner" content="venkateshammireddy" />
+    <link rel="me" href="https://www.linkedin.com/in/venkateshammireddy/" />
+    <link rel="canonical" href="https://venkateshcreations.github.io/portfolio/" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg:        #060c1a;
+      --surface:   #0b1528;
+      --card:      #0f1d38;
+      --card2:     #132040;
+      --border:    rgba(255,255,255,0.07);
+      --bg: #060c1a;
+      --card: rgba(10,18,38,.45);
+      --border: rgba(34,211,238,.12);
+      --text: #f8fafc;
+      --muted: #7b8fa8;
+      --cyan: #22d3ee;
+      --purple: #a78bfa;
+      --c-raw: #fb923c;
+      --c-mfg: #fbbf24;
+      --c-dist: #34d399;
+      --c-wh: #38bdf8;
+      --c-retail: #a78bfa;
+    }
+
+    body.light-mode {
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --border: rgba(15,23,42,.15);
+      --text: #0f172a;
+      --muted: #64748b;
+      --cyan: #0284c7;
+      --purple: #7c3aed;
+    }
+    body.light-mode header { background: linear-gradient(180deg, rgba(2,132,199,0.06) 0%, transparent 100%); }
+    body.light-mode .hdr-badge { background: rgba(2,132,199,0.1); border-color: rgba(2,132,199,0.25); }
+    body.light-mode h1 { background: linear-gradient(130deg, #0f172a 0%, var(--cyan) 45%, var(--purple) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    body.light-mode nav { background: rgba(255,255,255,0.9); border-bottom-color: var(--border); }
+    body.light-mode .chart-card, body.light-mode .kpi-card { box-shadow: 0 4px 20px rgba(0,0,0,0.04); }
+    body.light-mode #tooltip { background: rgba(255,255,255,0.95); box-shadow: 0 8px 30px rgba(0,0,0,0.1); border-color: rgba(15,23,42,0.1); }
+    body.light-mode .tt-row b { color: #0f172a; }
+    body.light-mode .rt-table tr:hover td { background: rgba(0,0,0,.03); }
+    body.light-mode .rt-table td { border-bottom-color: rgba(0,0,0,.04); }
+    body.light-mode .kpi-card:hover { border-color: rgba(0,0,0,.1); }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      font-family:'Inter',sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      min-height:100vh;
+      overflow-x:hidden;
+    }
+    body::before {
+      content:'';
+      position:fixed; inset:0;
+      background:
+        radial-gradient(ellipse 70% 50% at 15% 15%, rgba(34,211,238,0.055) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 85% 85%, rgba(167,139,250,0.055) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 50% 50%, rgba(52,211,153,0.025) 0%, transparent 55%);
+      pointer-events:none; z-index:0;
+    }
+
+    /* ─── SCROLLBAR ─── */
+    ::-webkit-scrollbar { width:6px; height:6px; }
+    ::-webkit-scrollbar-track { background:var(--bg); }
+    ::-webkit-scrollbar-thumb { background:rgba(255,255,255,0.1); border-radius:3px; }
+
+    /* ─── HEADER ─── */
+    header {
+      position:relative; z-index:1;
+      padding:64px 48px 52px;
+      border-bottom:1px solid var(--border);
+      background:linear-gradient(180deg, rgba(34,211,238,0.04) 0%, transparent 100%);
+    }
+    .hdr-container {
+      max-width: 1440px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: flex-end; gap: 40px;
+    }
+    .hdr-left { text-align: left; max-width: 700px; }
+    .hdr-right { text-align: right; padding-bottom: 6px; }
+    .hdr-badge {
+      display:inline-flex; align-items:center; gap:8px;
+      background:rgba(34,211,238,0.1); border:1px solid rgba(34,211,238,0.25);
+      border-radius:100px; padding:5px 16px;
+      font-size:11px; font-weight:700; letter-spacing:.12em;
+      text-transform:uppercase; color:var(--cyan); margin-bottom:22px;
+    }
+    .hdr-dot { width:7px; height:7px; background:var(--cyan); border-radius:50%; animation:blink 2s ease-in-out infinite; }
+    @keyframes blink { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:.4;transform:scale(.7);} }
+    h1 {
+      font-size:clamp(1.9rem, 4.5vw, 3.4rem);
+      font-weight:900; line-height:1.08;
+      background:linear-gradient(130deg,#fff 0%,var(--cyan) 45%,var(--purple) 100%);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+      background-clip:text; margin-bottom:14px;
+    }
+    .hdr-sub { font-size:1.05rem; color:var(--muted); margin:0; line-height:1.65; }
+    .stage-legend { display:flex; align-items:center; justify-content:flex-end; gap:20px; flex-wrap:wrap; }
+    .leg-item { display:flex; align-items:center; gap:7px; font-size:12px; color:var(--muted); }
+    .leg-dot { width:9px; height:9px; border-radius:50%; }
+
+    @media(max-width: 900px) {
+      .hdr-container { flex-direction: column; align-items: flex-start; gap: 32px; }
+      .stage-legend { justify-content: flex-start; }
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position:sticky; top:0; z-index:100;
+      background:rgba(6,12,26,.88); backdrop-filter:blur(18px);
+      border-bottom:1px solid var(--border);
+      padding:0 40px; display:flex; align-items:center;
+    }
+    .nav-tabs { display:flex; gap:2px; overflow-x:auto; flex:1; }
+    .nav-tabs::-webkit-scrollbar { display:none; }
+    .nav-controls { display:flex; gap:12px; margin-left:auto; padding-left:16px; }
+    .nav-tab {
+      padding:15px 18px; font-size:12.5px; font-weight:600;
+      color:var(--muted); cursor:pointer; white-space:nowrap;
+      border:none; border-bottom:2px solid transparent;
+      background:none; outline:none; transition:all .2s;
+      display:flex; align-items:center; gap:7px;
+    }
+    .nav-tab:hover { color:var(--text); }
+    .nav-tab.active { color:var(--cyan); border-bottom-color:var(--cyan); }
+
+    /* ─── MAIN ─── */
+    main { position:relative; z-index:1; max-width:1440px; margin:0 auto; padding:44px 48px; }
+    .section { display:none; animation:fadeUp .35s ease; }
+    .section.active { display:block; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(12px);} to{opacity:1;transform:translateY(0);} }
+
+    /* ─── SECTION HEADER ─── */
+    .sec-hdr { margin-bottom:32px; }
+    .sec-tag { font-size:10.5px; font-weight:800; text-transform:uppercase; letter-spacing:.12em; color:var(--cyan); margin-bottom:8px; }
+    .sec-title { font-size:1.75rem; font-weight:800; margin-bottom:8px; }
+    .sec-desc { font-size:13.5px; color:var(--muted); max-width:580px; line-height:1.65; }
+
+    /* ─── KPI ─── */
+    .kpi-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:16px; margin-bottom:44px; }
+    .kpi-card {
+      background:var(--card); border:1px solid var(--border); border-radius:16px; padding:22px;
+      position:relative; overflow:hidden; cursor:default; transition:all .3s;
+    }
+    .kpi-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:var(--kc,var(--cyan)); }
+    .kpi-card:hover { transform:translateY(-3px); border-color:rgba(255,255,255,0.14); }
+    .kpi-icon { font-size:22px; margin-bottom:12px; }
+    .kpi-label { font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:.09em; color:var(--muted); margin-bottom:7px; }
+    .kpi-val { font-size:1.9rem; font-weight:900; color:var(--kc,var(--cyan)); line-height:1; margin-bottom:4px; }
+    .kpi-sub { font-size:11px; color:var(--muted); }
+
+    /* ─── CHART CARD ─── */
+    .chart-card {
+      background:var(--card); border:1px solid var(--border);
+      border-radius:20px; padding:28px 32px; margin-bottom:28px;
+      display: flex; flex-direction: column; height: 100%;
+    }
+    .chart-card:last-child { margin-bottom:0; }
+    .cc-title { font-size:1.05rem; font-weight:700; margin-bottom:4px; }
+    .cc-sub { font-size:12.5px; color:var(--muted); margin-bottom:20px; }
+
+    /* ─── GRID LAYOUTS ─── */
+    .two-col { display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-bottom:28px; }
+    .three-col { display:grid; grid-template-columns:1fr 1fr 1fr; gap:24px; margin-bottom:28px; }
+    .two-col .chart-card, .three-col .chart-card { margin-bottom: 0; }
+    @media(max-width:900px) { .two-col,.three-col { grid-template-columns:1fr; } .two-col .chart-card, .three-col .chart-card { margin-bottom: 24px; } }
+    @media(max-width:768px) { main{padding:20px 20px;} header{padding:40px 20px 32px;} nav{padding:0 12px;} }
+
+    /* ─── TOOLTIP ─── */
+    #tooltip {
+      position:fixed; z-index:9999;
+      background:rgba(10,18,38,.97); backdrop-filter:blur(14px);
+      border:1px solid rgba(34,211,238,.3); border-radius:12px;
+      padding:11px 15px; font-size:12.5px;
+      pointer-events:none; opacity:0; transition:opacity .12s;
+      max-width:230px; line-height:1.5; box-shadow:0 20px 50px rgba(0,0,0,.55);
+    }
+    #tooltip.vis { opacity:1; }
+    .tt-hd { font-weight:700; color:var(--cyan); margin-bottom:7px; font-size:13px; }
+    .tt-row { display:flex; justify-content:space-between; gap:16px; color:var(--muted); }
+    .tt-row b { color:var(--text); font-weight:600; }
+
+    /* ─── NETWORK CONTROLS ─── */
+    .net-legend { display:flex; gap:14px; flex-wrap:wrap; margin-bottom:10px; }
+    .nl-item { display:flex; align-items:center; gap:6px; font-size:11.5px; color:var(--muted); }
+    .nl-dot { width:11px; height:11px; border-radius:50%; }
+    .ctrl-row { display:flex; gap:8px; margin-bottom:14px; }
+    .ctrl-btn {
+      padding:6px 14px; border-radius:8px; border:1px solid var(--border);
+      background:rgba(255,255,255,0.04); color:var(--muted);
+      font-size:11.5px; font-weight:600; cursor:pointer; transition:all .2s; font-family:inherit;
+    }
+    .ctrl-btn:hover { background:rgba(255,255,255,.08); color:var(--text); }
+
+    /* ─── ROUTE TABLE ─── */
+    .rt-table { width:100%; border-collapse:collapse; font-size:13px; }
+    .rt-table th {
+      text-align:left; padding:11px 14px;
+      font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:.09em;
+      color:var(--muted); border-bottom:1px solid var(--border);
+    }
+    .rt-table td { padding:13px 14px; border-bottom:1px solid rgba(255,255,255,.035); }
+    .rt-table tr:hover td { background:rgba(255,255,255,.02); }
+    .rt-table tr:last-child td { border-bottom:none; }
+    .risk-badge { display:inline-flex; padding:3px 10px; border-radius:100px; font-size:11px; font-weight:700; }
+    .r-low { background:rgba(52,211,153,.15); color:#34d399; }
+    .r-med { background:rgba(251,191,36,.15); color:#fbbf24; }
+    .r-hi  { background:rgba(244,114,182,.15); color:#f472b6; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      position:relative; z-index:1;
+      text-align:center; padding:44px 48px;
+      border-top:1px solid var(--border);
+      color:var(--muted); font-size:13px;
+    }
+    footer p + p { margin-top:6px; font-size:11px; }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════ HEADER -->
+<header>
+  <div class="hdr-container">
+    <div class="hdr-left">
+      <div class="hdr-badge"><div class="hdr-dot"></div>Live Analytics · Global Electronics Corporation</div>
+      <h1>Global Supply Chain<br>Network Analytics</h1>
+      <p class="hdr-sub">End-to-end visibility across raw materials, 4 manufacturing plants, 4 distribution centers, 3 regional warehouses, and worldwide retail networks.</p>
+    </div>
+    <div class="hdr-right">
+      <div class="stage-legend">
+        <div class="leg-item"><div class="leg-dot" style="background:var(--c-raw)"></div>Raw Materials</div>
+        <div class="leg-item"><div class="leg-dot" style="background:var(--c-mfg)"></div>Manufacturing</div>
+        <div class="leg-item"><div class="leg-dot" style="background:var(--c-dist)"></div>Distribution</div>
+        <div class="leg-item"><div class="leg-dot" style="background:var(--c-wh)"></div>Warehouses</div>
+        <div class="leg-item"><div class="leg-dot" style="background:var(--c-retail)"></div>Retail</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════ NAV -->
+<nav id="main-nav">
+  <div class="nav-tabs">
+    <button class="nav-tab active" data-sec="overview">📊 Overview</button>
+    <button class="nav-tab" data-sec="sankey">🌊 Sankey Flow</button>
+    <button class="nav-tab" data-sec="network">🕸 Network</button>
+    <button class="nav-tab" data-sec="sunburst">🌀 Hierarchy</button>
+    <button class="nav-tab" data-sec="geomap">🌍 World Map</button>
+    <button class="nav-tab" data-sec="shipments">📦 Shipments</button>
+    <button class="nav-tab" data-sec="warehouses">🏭 Warehouses</button>
+    <button class="nav-tab" data-sec="routes">🛣 Routes</button>
+    <button class="nav-tab" data-sec="sustainability">🌿 Sustainability</button>
+    <button class="nav-tab" data-sec="suppliers">📉 Suppliers</button>
+    <button class="nav-tab" data-sec="incidents">🚨 Incidents</button>
+    <button class="nav-tab" data-sec="forecasting">📈 Forecasting</button>
+  </div>
+  <div class="nav-controls">
+    <input type="text" id="global-search" placeholder="Search node..." style="padding:6px 10px; border-radius:6px; border:1px solid var(--border); background:rgba(255,255,255,0.05); color:var(--text); font-size:12px; width:130px; outline:none;" />
+    <button id="export-csv-btn" class="ctrl-btn" style="border:none;background:transparent;font-size:16px;padding:8px;" title="Download CSV Data">⬇</button>
+    <button id="export-svg-btn" class="ctrl-btn" style="border:none;background:transparent;font-size:16px;padding:8px;" title="Download Chart SVG">🖼</button>
+    <button id="theme-btn" class="ctrl-btn" style="border:none;background:transparent;font-size:16px;padding:8px;" title="Toggle Theme">🌞</button>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════ TOOLTIP -->
+<div id="tooltip"><div class="tt-hd" id="tt-hd"></div><div id="tt-bd"></div></div>
+
+<!-- ═══════════════════════════════════════════ MAIN -->
+<main>
+
+  <!-- ── OVERVIEW ── -->
+  <section id="sec-overview" class="section active">
+    <div class="sec-hdr">
+      <div class="sec-tag">Dashboard Overview</div>
+      <h2 class="sec-title">Supply Chain at a Glance</h2>
+      <p class="sec-desc">Key performance indicators across GEC's global operations spanning 12 countries, 4 manufacturing plants, and 3 continental distribution zones.</p>
+    </div>
+    <div class="kpi-grid" id="kpi-grid"></div>
+    <div class="two-col">
+      <div class="chart-card">
+        <div class="cc-title">Flow Volume by Stage</div>
+        <div class="cc-sub">Total units processed at each supply chain tier</div>
+        <svg id="ov-bar" style="width:100%;display:block;"></svg>
+      </div>
+      <div class="chart-card">
+        <div class="cc-title">Cost vs. Distance per Route</div>
+        <div class="cc-sub">Color = risk score (green=low, red=high)</div>
+        <svg id="ov-scatter" style="width:100%;display:block;"></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SANKEY ── -->
+  <section id="sec-sankey" class="section">
+    <div class="sec-hdr">
+      <div class="sec-tag">Material Flow Analysis</div>
+      <h2 class="sec-title">Sankey Flow Diagram</h2>
+      <p class="sec-desc">Traces raw materials from suppliers through manufacturing, distribution, warehousing and into retail store networks globally. Hover links and nodes for details.</p>
+    </div>
+    <div class="chart-card" style="padding:28px;">
+      <svg id="sankey-svg" style="width:100%;display:block;"></svg>
+    </div>
+  </section>
+
+  <!-- ── NETWORK ── -->
+  <section id="sec-network" class="section">
+    <div class="sec-hdr">
+      <div class="sec-tag">Network Topology</div>
+      <h2 class="sec-title">Force-Directed Network Graph</h2>
+      <p class="sec-desc">Interactive supply chain relationship map. Drag nodes to rearrange. Zoom and pan to explore. Hover for node details.</p>
+    </div>
+    <div class="chart-card">
+      <div class="net-legend" id="net-legend"></div>
+      <div class="ctrl-row">
+        <button class="ctrl-btn" id="btn-zoom-reset">↺ Reset Zoom</button>
+        <button class="ctrl-btn" id="btn-labels">🏷 Toggle Labels</button>
+        <button class="ctrl-btn" id="btn-reheat">⚡ Reheat</button>
+      </div>
+      <svg id="network-svg" style="width:100%;height:560px;cursor:grab;display:block;border-radius:12px;background:rgba(0,0,0,.15);"></svg>
+    </div>
+  </section>
+
+  <!-- ── SUNBURST ── -->
+  <section id="sec-sunburst" class="section">
+    <div class="sec-hdr">
+      <div class="sec-tag">Hierarchical Structure</div>
+      <h2 class="sec-title">Supply Chain Sunburst</h2>
+      <p class="sec-desc">Zoomable hierarchical breakdown. Click any arc segment to zoom in. Click the center circle to zoom back out.</p>
+    </div>
+    <div class="chart-card" style="align-items:center; justify-content:center; padding:32px;">
+      <svg id="sunburst-svg" style="display:block;"></svg>
+    </div>
+  </section>
+
+  <!-- ── GEO MAP ── -->
+  <section id="sec-geomap" class="section">
+    <div class="sec-hdr">
+      <div class="sec-tag">Geographic Intelligence</div>
+      <h2 class="sec-title">Global Shipment Flow Map</h2>
+      <p class="sec-desc">Arc thickness represents shipment volume. Animated dots show active cargo movement between supply chain hubs worldwide.</p>
+      <div class="ctrl-row" style="margin-top:14px; margin-bottom:0;">
+        <button class="ctrl-btn" id="btn-anim-play" style="width:90px;">⏸ Pause</button>
+        <button class="ctrl-btn" id="btn-anim-speed" style="width:100px;">🏃 1x Speed</button>
+      </div>
+    </div>
+    <div class="chart-card" style="padding:16px;">
+      <svg id="geo-svg" style="width:100%;display:block;border-radius:12px;"></svg>
+    </div>
+  </section>
+
+  <!-- ── SHIPMENTS ── -->
+  <section id="sec-shipments" class="section">
+    <div class="sec-hdr">
+      <div class="sec-tag">Shipment Analytics</div>
+      <h2 class="sec-title">Route Performance Metrics</h2>
+      <p class="sec-desc">Comparative analysis of shipment volume, transport cost, transit time, and carbon emissions across all active shipping routes.</p>
+    </div>
+    <div class="two-col">
+      <div class="chart-card">
+        <div class="cc-title">Shipment Volume by Route</div>
+        <div class="cc-sub">Total units shipped per route</div>
+        <svg id="ship-vol" style="width:100%;display:block;"></svg>
+      </div>
+      <div class="chart-card">
+        <div class="cc-title">Cost vs. Carbon Emissions</div>
+        <div class="cc-sub">Bubble = shipment volume</div>
+        <svg id="ship-cc" style="width:100%;display:block;"></svg>
+      </div>
+    </div>
+    <div class="chart-card">
+      <div class="cc-title">Transit Days Comparison</div>
+      <div class="cc-sub">Delivery time efficiency per route</div>
+      <svg id="ship-days" style="width:100%;display:block;"></svg>
+    </div>
+  </section>
+
+  <!-- ── WAREHOUSES ── -->
+  <section id="sec-warehouses" class="section">
+    <div class="sec-hdr">
+      <div class="sec-tag">Inventory Management</div>
+      <h2 class="sec-title">Warehouse Dashboard</h2>
+      <p class="sec-desc">Real-time utilization gauges and turnover rates across GEC's three regional warehouse facilities.</p>
+    </div>
+    <div class="three-col" id="gauge-row"></div>
+    <div class="chart-card" style="margin-top:24px;">
+      <div class="cc-title">Inventory vs. Capacity</div>
+      <div class="cc-sub">Current stock levels relative to maximum capacity</div>
+      <svg id="wh-bar" style="width:100%;display:block;"></svg>
+    </div>
+  </section>
+
+  <!-- ── ROUTES ── -->
+  <section id="sec-routes" class="section">
+    <div class="sec-hdr">
+      <div class="sec-tag">Route Optimization</div>
+      <h2 class="sec-title">Logistics Route Analysis</h2>
+      <p class="sec-desc">Multi-dimensional analysis covering distance, cost, delivery time and risk score for every active shipping corridor.</p>
+    </div>
+    <div class="two-col">
+      <div class="chart-card">
+        <div class="cc-title">Cost vs. Distance</div>
+        <div class="cc-sub">Bubble size = delivery days</div>
+        <svg id="rt-bubble" style="width:100%;display:block;"></svg>
+      </div>
+      <div class="chart-card">
+        <div class="cc-title">Risk Score by Route</div>
+        <div class="cc-sub">Color coded: green=low, amber=medium, rose=high risk</div>
+        <svg id="rt-risk" style="width:100%;display:block;"></svg>
+      </div>
+    </div>
+    <div class="chart-card">
+      <div class="cc-title">Route Summary Table</div>
+      <div class="cc-sub">Complete metrics for all active logistics corridors</div>
+      <table class="rt-table">
+        <thead>
+          <tr>
+            <th>Route</th>
+            <th>Distance (km)</th>
+            <th>Cost (USD)</th>
+            <th>Delivery Days</th>
+            <th>Risk Level</th>
+          </tr>
+        </thead>
+        <tbody id="rt-tbody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ── SUSTAINABILITY ── -->
+  <section id="sec-sustainability" class="section">
+    <div class="sec-hdr">
+      <div class="sec-tag">Environmental Impact</div>
+      <h2 class="sec-title">Sustainability Tracking</h2>
+      <p class="sec-desc">Monitoring carbon emissions (CO₂) across the supply chain, broken down by stage.</p>
+    </div>
+    <div class="chart-card">
+      <div class="cc-title">CO₂ Emissions by Stage (YTD)</div>
+      <div class="cc-sub">Stacked area chart showing monthly carbon footprint</div>
+      <svg id="sus-area" style="width:100%;height:400px;display:block;"></svg>
+    </div>
+  </section>
+
+  <!-- ── SUPPLIERS ── -->
+  <section id="sec-suppliers" class="section">
+    <div class="sec-hdr">
+      <div class="sec-tag">Vendor QA</div>
+      <h2 class="sec-title">Supplier Performance Metrics</h2>
+      <p class="sec-desc">Evaluating top raw material suppliers across key performance indicators.</p>
+    </div>
+    <div class="chart-card" style="display:flex; flex-direction:column; align-items:center;">
+      <div class="cc-title" style="align-self:flex-start">Supplier Radar Chart</div>
+      <div class="cc-sub" style="align-self:flex-start">Comparing Quality, Speed, Cost, Compliance, and Reliability</div>
+      <svg id="sup-radar" style="width:100%;height:650px;display:block;"></svg>
+    </div>
+  </section>
+
+  <!-- ── INCIDENTS ── -->
+  <section id="sec-incidents" class="section">
+    <div class="sec-hdr">
+      <div class="sec-tag">Real-Time Alerts</div>
+      <h2 class="sec-title">Active Supply Chain Disruptions</h2>
+      <p class="sec-desc">Live monitoring of logistics delays, shortages, and incidents affecting the network.</p>
+    </div>
+    <div class="chart-card">
+      <div class="cc-title">Incident Log</div>
+      <div class="cc-sub">Current active and monitoring alerts</div>
+      <table class="rt-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Incident</th>
+            <th>Type</th>
+            <th>Location</th>
+            <th>Impact</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="inc-tbody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ── FORECASTING ── -->
+  <section id="sec-forecasting" class="section">
+    <div class="sec-hdr">
+      <div class="sec-tag">Predictive Analytics</div>
+      <h2 class="sec-title">Demand Forecasting</h2>
+      <p class="sec-desc">Historical sales volume versus machine-learning predicted demand.</p>
+    </div>
+    <div class="chart-card">
+      <div class="cc-title">Global Demand Prediction</div>
+      <div class="cc-sub">Showing 95% confidence intervals for future quarters</div>
+      <svg id="for-line" style="width:100%;height:400px;display:block;"></svg>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>Global Electronics Corporation · Supply Chain Analytics Platform · Powered by D3.js v7</p>
+  <p>Portfolio Data Visualization Project — GEC Global Operations 2024</p>
+</footer>
+
+<!-- ═══════════════════════════════════════════ SCRIPTS -->
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
+
+<script>
+/* ══════════════════════════════════════════════════════
+   DATA
+══════════════════════════════════════════════════════ */
+const DATA = {
+  sankey: [
+    {source:"Steel",          target:"China Plant",               value:1200},
+    {source:"Aluminum",       target:"China Plant",               value:900},
+    {source:"Copper",         target:"India Plant",               value:850},
+    {source:"Semiconductors", target:"Vietnam Plant",             value:1400},
+    {source:"Sensors",        target:"Vietnam Plant",             value:1000},
+    {source:"Circuit Boards", target:"Mexico Plant",              value:1100},
+    {source:"China Plant",    target:"Singapore DC",              value:1800},
+    {source:"India Plant",    target:"Dubai DC",                  value:1600},
+    {source:"Vietnam Plant",  target:"Singapore DC",              value:2200},
+    {source:"Mexico Plant",   target:"Chicago DC",                value:1700},
+    {source:"Singapore DC",   target:"Asia Warehouse",            value:3500},
+    {source:"Dubai DC",       target:"Europe Warehouse",          value:2200},
+    {source:"Rotterdam DC",   target:"Europe Warehouse",          value:3100},
+    {source:"Chicago DC",     target:"N.America Warehouse",       value:2800},
+    {source:"Asia Warehouse",      target:"Store Asia",           value:3200},
+    {source:"Europe Warehouse",    target:"Store Europe",         value:4700},
+    {source:"N.America Warehouse", target:"Store US",             value:2600}
+  ],
+
+  network: {
+    nodes:[
+      {id:"Steel",          group:"RawMaterial"},
+      {id:"Aluminum",       group:"RawMaterial"},
+      {id:"Semiconductors", group:"RawMaterial"},
+      {id:"China Plant",    group:"Manufacturing"},
+      {id:"India Plant",    group:"Manufacturing"},
+      {id:"Vietnam Plant",  group:"Manufacturing"},
+      {id:"Singapore DC",   group:"Distribution"},
+      {id:"Dubai DC",       group:"Distribution"},
+      {id:"Chicago DC",     group:"Distribution"},
+      {id:"Asia Warehouse", group:"Warehouse"},
+      {id:"Europe Warehouse",group:"Warehouse"},
+      {id:"Retail Asia",    group:"Retail"},
+      {id:"Retail Europe",  group:"Retail"},
+      {id:"Retail USA",     group:"Retail"}
+    ],
+    links:[
+      {source:"Steel",         target:"China Plant"},
+      {source:"Aluminum",      target:"China Plant"},
+      {source:"Semiconductors",target:"Vietnam Plant"},
+      {source:"China Plant",   target:"Singapore DC"},
+      {source:"India Plant",   target:"Dubai DC"},
+      {source:"Vietnam Plant", target:"Singapore DC"},
+      {source:"Singapore DC",  target:"Asia Warehouse"},
+      {source:"Dubai DC",      target:"Europe Warehouse"},
+      {source:"Asia Warehouse",target:"Retail Asia"},
+      {source:"Europe Warehouse",target:"Retail Europe"}
+    ]
+  },
+
+  hierarchy: {
+    name:"Global Supply Chain",
+    children:[
+      {name:"Raw Materials",children:[
+        {name:"Metals",children:[{name:"Steel"},{name:"Aluminum"},{name:"Copper"}]},
+        {name:"Plastics",children:[{name:"Polyethylene"},{name:"Polypropylene"}]},
+        {name:"Electronics",children:[{name:"Semiconductors"},{name:"Sensors"},{name:"Circuit Boards"}]}
+      ]},
+      {name:"Manufacturing",children:[
+        {name:"China Plant"},{name:"India Plant"},{name:"Vietnam Plant"},{name:"Mexico Plant"}
+      ]},
+      {name:"Distribution",children:[
+        {name:"Singapore DC"},{name:"Dubai DC"},{name:"Rotterdam DC"},{name:"Chicago DC"}
+      ]},
+      {name:"Warehouses",children:[
+        {name:"Asia Warehouse"},{name:"Europe Warehouse"},{name:"N.America Warehouse"}
+      ]},
+      {name:"Retail",children:[
+        {name:"Store Network Asia"},{name:"Store Network Europe"},{name:"Store Network US"}
+      ]}
+    ]
+  },
+
+  geoflow:[
+    {source:"Shanghai",      sLat:31.2304, sLng:121.4737, target:"Singapore",   tLat:1.3521,  tLng:103.8198, volume:1800},
+    {source:"Mumbai",        sLat:19.0760, sLng:72.8777,  target:"Dubai",       tLat:25.2048, tLng:55.2708,  volume:1600},
+    {source:"Ho Chi Minh",   sLat:10.8231, sLng:106.6297, target:"Singapore",   tLat:1.3521,  tLng:103.8198, volume:2200},
+    {source:"Monterrey",     sLat:25.6866, sLng:-100.3161,target:"Chicago",     tLat:41.8781, tLng:-87.6298, volume:1700}
+  ],
+
+  shipments:[
+    {route:"Shanghai–Singapore", volume:1800, days:4, cost:120000, co2:220},
+    {route:"Mumbai–Dubai",       volume:1600, days:3, cost:98000,  co2:180},
+    {route:"Vietnam–Singapore",  volume:2200, days:2, cost:105000, co2:160},
+    {route:"Mexico–Chicago",     volume:1700, days:5, cost:145000, co2:250}
+  ],
+
+  inventory:[
+    {warehouse:"Asia Warehouse",      inventory:125000, capacity:150000, utilization:83, turnover:12},
+    {warehouse:"Europe Warehouse",    inventory:185000, capacity:220000, utilization:84, turnover:10},
+    {warehouse:"N.America Warehouse", inventory:145000, capacity:180000, utilization:81, turnover:9}
+  ],
+
+  routes:[
+    {route:"Shanghai → Singapore", dist:3800, cost:120000, days:4, risk:12},
+    {route:"Mumbai → Dubai",       dist:1900, cost:98000,  days:3, risk:8},
+    {route:"Ho Chi Minh → SG",    dist:1100, cost:105000, days:2, risk:6},
+    {route:"Monterrey → Chicago",  dist:2100, cost:145000, days:5, risk:14}
+  ],
+
+  sustainability:[
+    { month: "Jan", RawMaterial: 140, Manufacturing: 320, Transport: 250 },
+    { month: "Feb", RawMaterial: 145, Manufacturing: 310, Transport: 260 },
+    { month: "Mar", RawMaterial: 130, Manufacturing: 290, Transport: 240 },
+    { month: "Apr", RawMaterial: 125, Manufacturing: 280, Transport: 220 },
+    { month: "May", RawMaterial: 120, Manufacturing: 270, Transport: 210 },
+    { month: "Jun", RawMaterial: 115, Manufacturing: 260, Transport: 190 },
+    { month: "Jul", RawMaterial: 110, Manufacturing: 255, Transport: 185 },
+    { month: "Aug", RawMaterial: 105, Manufacturing: 240, Transport: 170 },
+    { month: "Sep", RawMaterial: 100, Manufacturing: 230, Transport: 160 },
+    { month: "Oct", RawMaterial: 95,  Manufacturing: 220, Transport: 150 },
+    { month: "Nov", RawMaterial: 90,  Manufacturing: 210, Transport: 140 },
+    { month: "Dec", RawMaterial: 85,  Manufacturing: 200, Transport: 130 }
+  ],
+
+  suppliers:[
+    { supplier: "TechMetals Inc", quality: 92, speed: 85, cost: 75, compliance: 98, reliability: 88 },
+    { supplier: "AluSource Global", quality: 85, speed: 94, cost: 82, compliance: 90, reliability: 85 },
+    { supplier: "CopEx Mining", quality: 78, speed: 75, cost: 95, compliance: 82, reliability: 70 },
+    { supplier: "Silico Semi", quality: 98, speed: 70, cost: 65, compliance: 100, reliability: 95 },
+    { supplier: "SensoryTech", quality: 88, speed: 92, cost: 80, compliance: 85, reliability: 90 }
+  ],
+
+  incidents:[
+    { id: "INC-001", title: "Shanghai Port Congestion", type: "Logistics", severity: "High", location: "Shanghai", coordinates: [121.4737, 31.2304], impact: "48h delays on outbound Asia shipping", status: "Active" },
+    { id: "INC-002", title: "Suez Canal Slowdown", type: "Transit", severity: "Medium", location: "Suez", coordinates: [32.31, 30.58], impact: "12h delay on Asia-Europe route", status: "Monitoring" },
+    { id: "INC-003", title: "Copper Supply Shortage", type: "Raw Material", severity: "Critical", location: "Santiago", coordinates: [-70.6693, -33.4489], impact: "15% reduction in copper supply capacity", status: "Active" },
+    { id: "INC-004", title: "Mexico Plant Power Outage", type: "Manufacturing", severity: "Low", location: "Monterrey", coordinates: [-100.3161, 25.6866], impact: "4h production halt, resolved", status: "Resolved" }
+  ],
+
+  forecasting:[
+    { quarter: "Q1 2023", historical: 12000, forecast: null, lower: null, upper: null },
+    { quarter: "Q2 2023", historical: 13500, forecast: null, lower: null, upper: null },
+    { quarter: "Q3 2023", historical: 15000, forecast: null, lower: null, upper: null },
+    { quarter: "Q4 2023", historical: 18500, forecast: null, lower: null, upper: null },
+    { quarter: "Q1 2024", historical: 14000, forecast: 14000, lower: 14000, upper: 14000 },
+    { quarter: "Q2 2024", historical: null, forecast: 15200, lower: 14800, upper: 15600 },
+    { quarter: "Q3 2024", historical: null, forecast: 16800, lower: 15500, upper: 18100 },
+    { quarter: "Q4 2024", historical: null, forecast: 20500, lower: 18000, upper: 23000 },
+    { quarter: "Q1 2025", historical: null, forecast: 16000, lower: 13000, upper: 19000 }
+  ]
+};
+
+/* ══════════════════════════════════════════════════════
+   COLOR HELPERS
+══════════════════════════════════════════════════════ */
+const STAGE_COLOR = {
+  RawMaterial:  '#fb923c',
+  Manufacturing:'#fbbf24',
+  Distribution: '#34d399',
+  Warehouse:    '#38bdf8',
+  Retail:       '#a78bfa'
+};
+const STAGE_LABEL = {
+  RawMaterial:'Raw Material', Manufacturing:'Manufacturing',
+  Distribution:'Distribution', Warehouse:'Warehouse', Retail:'Retail'
+};
+const ROUTE_COLORS = ['#22d3ee','#fbbf24','#34d399','#a78bfa'];
+
+function sankeyStage(name){
+  if(['Steel','Aluminum','Copper','Semiconductors','Sensors','Circuit Boards'].includes(name)) return 'RawMaterial';
+  if(['China Plant','India Plant','Vietnam Plant','Mexico Plant'].includes(name)) return 'Manufacturing';
+  if(['Singapore DC','Dubai DC','Rotterdam DC','Chicago DC'].includes(name)) return 'Distribution';
+  if(['Asia Warehouse','Europe Warehouse','N.America Warehouse'].includes(name)) return 'Warehouse';
+  return 'Retail';
+}
+
+/* ══════════════════════════════════════════════════════
+   TOOLTIP
+══════════════════════════════════════════════════════ */
+const TT = document.getElementById('tooltip');
+const TT_HD = document.getElementById('tt-hd');
+const TT_BD = document.getElementById('tt-bd');
+
+function ttShow(ev, title, rows){
+  TT_HD.textContent = title;
+  TT_BD.innerHTML = rows.map(([k,v])=>`<div class="tt-row"><span>${k}</span><b>${v}</b></div>`).join('');
+  TT.classList.add('vis');
+  ttMove(ev);
+}
+function ttMove(ev){
+  const x = ev.clientX+14, y = ev.clientY-8;
+  TT.style.left = Math.min(x, innerWidth-245)+'px';
+  TT.style.top  = Math.min(y, innerHeight-160)+'px';
+}
+function ttHide(){ TT.classList.remove('vis'); }
+
+/* ══════════════════════════════════════════════════════
+   NAV / SECTION ROUTING
+══════════════════════════════════════════════════════ */
+const SEC_MAP = {
+  overview:'sec-overview', sankey:'sec-sankey', network:'sec-network',
+  sunburst:'sec-sunburst', geomap:'sec-geomap', shipments:'sec-shipments',
+  warehouses:'sec-warehouses', routes:'sec-routes',
+  sustainability:'sec-sustainability', suppliers:'sec-suppliers',
+  incidents:'sec-incidents', forecasting:'sec-forecasting'
+};
+const inited = new Set(['overview']);
+
+document.getElementById('theme-btn').addEventListener('click', (e) => {
+  document.body.classList.toggle('light-mode');
+  const isLight = document.body.classList.contains('light-mode');
+  e.target.textContent = isLight ? '🌙' : '🌞';
+});
+
+document.querySelectorAll('.nav-tab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+    tab.classList.add('active');
+    const k = tab.dataset.sec;
+    const secEl = document.getElementById(SEC_MAP[k]);
+    secEl.classList.add('active');
+    // Scroll the section into view smoothly
+    setTimeout(()=>secEl.scrollIntoView({behavior:'smooth', block:'start'}), 30);
+    if(!inited.has(k)){ inited.add(k); setTimeout(()=>initSec(k),80); }
+  });
+});
+
+function initSec(k){
+  switch(k){
+    case 'sankey':     drawSankey();     break;
+    case 'network':    drawNetwork();    break;
+    case 'sunburst':   drawSunburst();   break;
+    case 'geomap':     drawGeoMap();     break;
+    case 'shipments':  drawShipments();  break;
+    case 'warehouses': drawWarehouses(); break;
+    case 'routes':     drawRoutes();     break;
+    case 'sustainability': drawSustainability(); break;
+    case 'suppliers':  drawSuppliers();  break;
+    case 'incidents':  drawIncidents();  break;
+    case 'forecasting':drawForecasting();break;
+  }
+}
+
+/* ══════════════════════════════════════════════════════
+   GLOBAL SEARCH
+══════════════════════════════════════════════════════ */
+document.getElementById('global-search').addEventListener('input', (e) => {
+  const q = e.target.value.toLowerCase().trim();
+  
+  // Sankey
+  const sanSvg = document.getElementById('sankey-svg');
+  if(sanSvg) d3.select(sanSvg).selectAll('rect').attr('opacity', d => !q || d.id.toLowerCase().includes(q) ? 0.9 : 0.1);
+  
+  // Network
+  const netSvg = document.getElementById('network-svg');
+  if(netSvg) {
+    const d3svg = d3.select(netSvg);
+    d3svg.selectAll('circle').attr('opacity', d => !q || d.id.toLowerCase().includes(q) ? 1 : 0.1);
+    d3svg.selectAll('text').attr('opacity', d => !q || d.id.toLowerCase().includes(q) ? 1 : 0.1);
+  }
+  
+  // Sunburst
+  const sunSvg = document.getElementById('sunburst-svg');
+  if(sunSvg) d3.select(sunSvg).selectAll('path').attr('fill-opacity', d => !q || d.data.name.toLowerCase().includes(q) ? (d.children?.length?0.85:0.95) : 0.1);
+});
+
+/* ══════════════════════════════════════════════════════
+   EXPORTS
+══════════════════════════════════════════════════════ */
+document.getElementById('export-svg-btn').addEventListener('click', () => {
+  const activeSec = document.querySelector('.section.active');
+  const svg = activeSec.querySelector('svg');
+  if(!svg) return alert('No chart found in this section to export.');
+  
+  const serializer = new XMLSerializer();
+  let source = serializer.serializeToString(svg);
+  if(!source.match(/^<svg[^>]+xmlns="http\:\/\/www\.w3\.org\/2000\/svg"/)){
+    source = source.replace(/^<svg/, '<svg xmlns="http://www.w3.org/2000/svg"');
+  }
+  source = '<?xml version="1.0" standalone="no"?>\r\n' + source;
+  const url = "data:image/svg+xml;charset=utf-8,"+encodeURIComponent(source);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `gec-chart-${activeSec.id}.svg`;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+});
+
+document.getElementById('export-csv-btn').addEventListener('click', () => {
+  const activeSec = document.querySelector('.section.active');
+  const dmap = { 'sec-sankey':'sankey', 'sec-network':'network', 'sec-sunburst':'hierarchy', 'sec-geomap':'geomap', 'sec-shipments':'shipments', 'sec-warehouses':'inventory', 'sec-routes':'routes' };
+  const dk = dmap[activeSec.id];
+  if(!dk || !DATA[dk]) return alert('No raw dataset available for this section.');
+  let arr = DATA[dk];
+  if(!Array.isArray(arr)) {
+    if(arr.nodes) arr = [...arr.nodes, ...arr.links];
+    else if(arr.name) arr = [arr];
+  }
+  if(!arr || !arr.length) return;
+  const keys = Object.keys(arr[0]).filter(k => typeof arr[0][k] !== 'object');
+  const csv = [keys.join(','), ...arr.map(row => keys.map(k => `"${row[k]||''}"`).join(','))].join('\n');
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `gec-data-${activeSec.id}.csv`;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+});
+
+/* ══════════════════════════════════════════════════════
+   HELPERS
+══════════════════════════════════════════════════════ */
+function svgW(el){ return el.parentElement.clientWidth - 64; }
+
+function counter(el, end, pre='', suf='', dec=0){
+  const dur=1400, t0=performance.now();
+  function step(ts){
+    const p=Math.min((ts-t0)/dur,1), ease=1-Math.pow(1-p,3);
+    const v=end*ease;
+    el.textContent = pre+(dec?v.toFixed(dec):Math.round(v).toLocaleString())+suf;
+    if(p<1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+function axStyle(g){
+  g.select('.domain').attr('stroke','var(--border)');
+  g.selectAll('.tick line').attr('stroke','transparent');
+  g.selectAll('.tick text').attr('fill','var(--muted)').attr('font-size','11px').attr('font-family','Inter,sans-serif');
+}
+
+/* ══════════════════════════════════════════════════════
+   KPI CARDS
+══════════════════════════════════════════════════════ */
+function buildKPIs(){
+  const kpis=[
+    {icon:'📦', label:'Total Shipment Volume', val:7300,   pre:'', suf:' units', c:'#22d3ee'},
+    {icon:'💰', label:'Total Logistics Cost',  val:468000, pre:'$',suf:'',       c:'#fbbf24'},
+    {icon:'🛣', label:'Active Routes',         val:4,      pre:'', suf:'',       c:'#34d399'},
+    {icon:'⏱', label:'Avg Transit Days',      val:3.5,    pre:'', suf:' days',  c:'#a78bfa', dec:1},
+    {icon:'🏭', label:'Warehouses',            val:3,      pre:'', suf:'',       c:'#fb923c'},
+    {icon:'🌿', label:'Total CO₂ Emissions',  val:810,    pre:'', suf:' tCO₂', c:'#f472b6'}
+  ];
+  const grid=document.getElementById('kpi-grid');
+  grid.innerHTML='';
+  kpis.forEach(k=>{
+    const d=document.createElement('div');
+    d.className='kpi-card'; d.style.setProperty('--kc',k.c);
+    d.innerHTML=`<div class="kpi-icon">${k.icon}</div>
+      <div class="kpi-label">${k.label}</div>
+      <div class="kpi-val" id="kv-${k.label.replace(/\s+/g,'_')}">0</div>`;
+    grid.appendChild(d);
+    setTimeout(()=>counter(d.querySelector('.kpi-val'),k.val,k.pre,k.suf,k.dec||0),150);
+  });
+}
+
+/* ══════════════════════════════════════════════════════
+   OVERVIEW CHARTS
+══════════════════════════════════════════════════════ */
+function buildOverviewBar(){
+  const el=document.getElementById('ov-bar');
+  const W=svgW(el), H=240;
+  const margin={top:16,right:20,bottom:44,left:56};
+  const iw=W-margin.left-margin.right, ih=H-margin.top-margin.bottom;
+  el.setAttribute('viewBox',`0 0 ${W} ${H}`);
+
+  const data=[
+    {stage:'Raw\nMaterials',val:6450,c:'#fb923c'},
+    {stage:'Manufacturing',  val:7300,c:'#fbbf24'},
+    {stage:'Distribution',   val:10500,c:'#34d399'},
+    {stage:'Warehouses',     val:10500,c:'#38bdf8'},
+    {stage:'Retail',         val:10500,c:'#a78bfa'}
+  ];
+
+  const svg=d3.select(el); svg.selectAll('*').remove();
+  const g=svg.append('g').attr('transform',`translate(${margin.left},${margin.top})`);
+
+  const x=d3.scaleBand().domain(data.map(d=>d.stage)).range([0,iw]).padding(.32);
+  const y=d3.scaleLinear().domain([0,12000]).nice().range([ih,0]);
+
+  g.selectAll('line.grid').data(y.ticks(5)).enter().append('line')
+    .attr('class','grid').attr('x1',0).attr('x2',iw)
+    .attr('y1',d=>y(d)).attr('y2',d=>y(d))
+    .attr('stroke','rgba(255,255,255,.05)').attr('stroke-dasharray','4,4');
+
+  g.selectAll('rect.bar').data(data).enter().append('rect')
+    .attr('class','bar').attr('x',d=>x(d.stage)).attr('width',x.bandwidth())
+    .attr('y',ih).attr('height',0).attr('rx',5).attr('fill',d=>d.c).attr('opacity',.9)
+    .on('mouseover',(e,d)=>ttShow(e,d.stage.replace('\n',' '),[['Volume',d.val.toLocaleString()+' units']]))
+    .on('mousemove',ttMove).on('mouseout',ttHide)
+    .transition().duration(850).delay((_,i)=>i*100)
+    .attr('y',d=>y(d.val)).attr('height',d=>ih-y(d.val));
+
+  g.selectAll('text.vl').data(data).enter().append('text').attr('class','vl')
+    .attr('x',d=>x(d.stage)+x.bandwidth()/2).attr('y',d=>y(d.val)-6)
+    .attr('text-anchor','middle').attr('fill','#e2e8f0').attr('font-size','10px').attr('font-weight','700')
+    .text(d=>(d.val/1000).toFixed(1)+'k');
+
+  axStyle(g.append('g').attr('transform',`translate(0,${ih})`).call(d3.axisBottom(x).tickSize(0)));
+  axStyle(g.append('g').call(d3.axisLeft(y).ticks(5).tickFormat(d=>d3.format(',')(d))));
+  g.select('.domain').remove();
+}
+
+function buildOverviewScatter(){
+  const el=document.getElementById('ov-scatter');
+  const W=svgW(el), H=240;
+  const margin={top:16,right:24,bottom:44,left:64};
+  const iw=W-margin.left-margin.right, ih=H-margin.top-margin.bottom;
+  el.setAttribute('viewBox',`0 0 ${W} ${H}`);
+
+  const svg=d3.select(el); svg.selectAll('*').remove();
+  const g=svg.append('g').attr('transform',`translate(${margin.left},${margin.top})`);
+
+  const x=d3.scaleLinear().domain([800,4500]).range([0,iw]);
+  const y=d3.scaleLinear().domain([80000,160000]).range([ih,0]);
+  const cScale=d3.scaleSequential([6,14],d3.interpolateRdYlGn);
+
+  g.selectAll('line.grid').data(y.ticks(4)).enter().append('line')
+    .attr('class','grid').attr('x1',0).attr('x2',iw)
+    .attr('y1',d=>y(d)).attr('y2',d=>y(d))
+    .attr('stroke','rgba(255,255,255,.05)').attr('stroke-dasharray','4,4');
+
+  g.selectAll('circle').data(DATA.routes).enter().append('circle')
+    .attr('cx',d=>x(d.dist)).attr('cy',d=>y(d.cost)).attr('r',0)
+    .attr('fill',d=>cScale(d.risk)).attr('stroke','#fff').attr('stroke-width',1.5).attr('opacity',.9)
+    .on('mouseover',(e,d)=>ttShow(e,d.route,[['Distance',d.dist+' km'],['Cost','$'+d.cost.toLocaleString()],['Risk',d.risk]]))
+    .on('mousemove',ttMove).on('mouseout',ttHide)
+    .transition().duration(600).delay((_,i)=>i*120).attr('r',11);
+
+  g.selectAll('text.pt').data(DATA.routes).enter().append('text').attr('class','pt')
+    .attr('x',d=>x(d.dist)).attr('y',d=>y(d.cost)-15)
+    .attr('text-anchor','middle').attr('fill','#7b8fa8').attr('font-size','9px')
+    .text(d=>d.route.split('→')[0].trim());
+
+  axStyle(g.append('g').attr('transform',`translate(0,${ih})`).call(d3.axisBottom(x).ticks(5).tickFormat(d=>d/1000+'k km')));
+  axStyle(g.append('g').call(d3.axisLeft(y).ticks(4).tickFormat(d=>'$'+d/1000+'k')));
+}
+
+/* ══════════════════════════════════════════════════════
+   SANKEY
+══════════════════════════════════════════════════════ */
+function drawSankey(){
+  const el=document.getElementById('sankey-svg');
+  const W=el.parentElement.clientWidth-56, H=600;
+  el.setAttribute('viewBox',`0 0 ${W} ${H}`);
+
+  const svg=d3.select(el); svg.selectAll('*').remove();
+
+  // Build node index map
+  const allNames=[...new Set(DATA.sankey.flatMap(d=>[d.source,d.target]))];
+  const nameIdx=Object.fromEntries(allNames.map((n,i)=>[n,i]));
+  const nodes=allNames.map(name=>({name}));
+  const links=DATA.sankey.map(d=>({
+    source:nameIdx[d.source],
+    target:nameIdx[d.target],
+    value:d.value
+  }));
+
+  const sankey=d3.sankey()
+    .nodeAlign(d3.sankeyJustify)
+    .nodeWidth(22)
+    .nodePadding(18)
+    .extent([[28,28],[W-28,H-28]]);
+
+  let graph;
+  try {
+    graph=sankey({
+      nodes:nodes.map(d=>Object.assign({},d)),
+      links:links.map(d=>Object.assign({},d))
+    });
+  } catch(err) {
+    svg.append('text').attr('x',W/2).attr('y',H/2).attr('text-anchor','middle')
+      .attr('fill','#f472b6').attr('font-size','13px').text('Sankey layout error: '+err.message);
+    return;
+  }
+
+  // Gradient defs
+  const defs=svg.append('defs');
+  graph.links.forEach((lk,i)=>{
+    const g2=defs.append('linearGradient')
+      .attr('id',`slg${i}`).attr('gradientUnits','userSpaceOnUse')
+      .attr('x1',lk.source.x1).attr('x2',lk.target.x0);
+    g2.append('stop').attr('offset','0%').attr('stop-color',STAGE_COLOR[sankeyStage(lk.source.name)]).attr('stop-opacity',.7);
+    g2.append('stop').attr('offset','100%').attr('stop-color',STAGE_COLOR[sankeyStage(lk.target.name)]).attr('stop-opacity',.7);
+  });
+
+  // Links
+  svg.append('g').attr('fill','none')
+    .selectAll('path').data(graph.links).enter().append('path')
+    .attr('d',d3.sankeyLinkHorizontal())
+    .attr('stroke',(_,i)=>`url(#slg${i})`)
+    .attr('stroke-width',d=>Math.max(1,d.width))
+    .attr('opacity',0)
+    .on('mouseover',function(e,d){
+      d3.select(this).attr('opacity',.85);
+      ttShow(e,`${d.source.name} → ${d.target.name}`,[['Volume',d.value.toLocaleString()+' units']]);
+    })
+    .on('mousemove',ttMove)
+    .on('mouseout',function(){ d3.select(this).attr('opacity',.5); ttHide(); })
+    .transition().duration(1000).delay((_,i)=>i*25).attr('opacity',.5);
+
+  // Nodes
+  const nodeG=svg.append('g').selectAll('g').data(graph.nodes).enter().append('g')
+    .attr('transform',d=>`translate(${d.x0},${d.y0})`);
+
+  nodeG.append('rect')
+    .attr('height',d=>d.y1-d.y0).attr('width',d=>d.x1-d.x0)
+    .attr('fill',d=>STAGE_COLOR[sankeyStage(d.name)])
+    .attr('rx',5)
+    .attr('filter',d=>`drop-shadow(0 0 6px ${STAGE_COLOR[sankeyStage(d.name)]}60)`)
+    .on('mouseover',(e,d)=>ttShow(e,d.name,[['Stage',STAGE_LABEL[sankeyStage(d.name)]||sankeyStage(d.name)],['Flow',d.value?.toLocaleString()+' units']]))
+    .on('mousemove',ttMove).on('mouseout',ttHide);
+
+  nodeG.append('text')
+    .attr('x',d=>d.x0<W/2?(d.x1-d.x0)+9:-9)
+    .attr('y',d=>(d.y1-d.y0)/2)
+    .attr('dy','0.35em')
+    .attr('text-anchor',d=>d.x0<W/2?'start':'end')
+    .attr('fill','#e2e8f0').attr('font-size','11.5px').attr('font-weight','500')
+    .text(d=>d.name);
+}
+
+/* ══════════════════════════════════════════════════════
+   FORCE-DIRECTED NETWORK
+══════════════════════════════════════════════════════ */
+let netSim, netLabelsOn=true;
+
+function drawNetwork(){
+  const el=document.getElementById('network-svg');
+  const containerW = el.parentElement.clientWidth || 900;
+  const W=containerW-64, H=560;
+  el.setAttribute('viewBox',`0 0 ${W} ${H}`);
+  el.setAttribute('width',W); el.setAttribute('height',H);
+
+  // Legend
+  document.getElementById('net-legend').innerHTML=
+    Object.entries(STAGE_LABEL).map(([k,v])=>
+      `<div class="nl-item"><div class="nl-dot" style="background:${STAGE_COLOR[k]}"></div>${v}</div>`
+    ).join('');
+
+  const svg=d3.select(el); svg.selectAll('*').remove();
+  const container=svg.append('g').attr('class','net-g');
+
+  const zoom=d3.zoom().scaleExtent([.2,4]).on('zoom',e=>container.attr('transform',e.transform));
+  svg.call(zoom);
+
+  const nodes=DATA.network.nodes.map((d,i,arr)=>{
+    // Pre-position in a circle so all nodes are immediately visible
+    const angle = (i / arr.length) * 2 * Math.PI;
+    return Object.assign({}, d, { x: W/2 + Math.cos(angle)*180, y: H/2 + Math.sin(angle)*180 });
+  });
+  const links=DATA.network.links.map(d=>Object.assign({},d));
+
+  netSim=d3.forceSimulation(nodes)
+    .force('link',d3.forceLink(links).id(d=>d.id).distance(130).strength(.7))
+    .force('charge',d3.forceManyBody().strength(-450))
+    .force('center',d3.forceCenter(W/2,H/2))
+    .force('collide',d3.forceCollide(38))
+    .alphaDecay(0.02);
+
+  // Arrow marker
+  svg.append('defs').append('marker')
+    .attr('id','arrow-net').attr('viewBox','0 -5 10 10')
+    .attr('refX',26).attr('refY',0)
+    .attr('markerWidth',6).attr('markerHeight',6).attr('orient','auto')
+    .append('path').attr('d','M0,-5L10,0L0,5').attr('fill','#2d4a7a').attr('opacity',.8);
+
+  const link=container.append('g').selectAll('line').data(links).enter().append('line')
+    .attr('stroke','#2d4a7a').attr('stroke-width',2).attr('stroke-opacity',.75)
+    .attr('marker-end','url(#arrow-net)');
+
+  const nodeG=container.append('g').selectAll('g').data(nodes).enter().append('g')
+    .attr('cursor','grab')
+    .call(d3.drag()
+      .on('start',(e,d)=>{ if(!e.active) netSim.alphaTarget(.3).restart(); d.fx=d.x; d.fy=d.y; })
+      .on('drag', (e,d)=>{ d.fx=e.x; d.fy=e.y; })
+      .on('end',  (e,d)=>{ if(!e.active) netSim.alphaTarget(0); d.fx=null; d.fy=null; })
+    );
+
+  nodeG.append('circle')
+    .attr('r',20)
+    .attr('fill',d=>STAGE_COLOR[d.group])
+    .attr('stroke','rgba(255,255,255,.25)').attr('stroke-width',2)
+    .attr('filter',d=>`drop-shadow(0 0 8px ${STAGE_COLOR[d.group]}70)`)
+    .on('mouseover',(e,d)=>{ d3.select(e.currentTarget).attr('r',24); ttShow(e,d.id,[['Group',STAGE_LABEL[d.group]]]); })
+    .on('mousemove',ttMove)
+    .on('mouseout',(e)=>{ d3.select(e.currentTarget).attr('r',20); ttHide(); });
+
+  nodeG.append('text').attr('text-anchor','middle').attr('dy','0.36em')
+    .attr('fill','#fff').attr('font-size','9px').attr('font-weight','800')
+    .attr('pointer-events','none')
+    .text(d=>d.id.split(' ')[0].substring(0,4));
+
+  const outerLabels=nodeG.append('text').attr('class','net-label')
+    .attr('text-anchor','middle').attr('dy',36)
+    .attr('fill','#7b8fa8').attr('font-size','10px').attr('pointer-events','none')
+    .text(d=>d.id);
+
+  netSim.on('tick',()=>{
+    link
+      .attr('x1',d=>d.source.x).attr('y1',d=>d.source.y)
+      .attr('x2',d=>d.target.x).attr('y2',d=>d.target.y);
+    nodeG.attr('transform',d=>`translate(${d.x},${d.y})`);
+  });
+
+  document.getElementById('btn-zoom-reset').onclick=()=>
+    svg.transition().duration(500).call(zoom.transform,d3.zoomIdentity);
+  document.getElementById('btn-labels').onclick=()=>{
+    netLabelsOn=!netLabelsOn;
+    outerLabels.attr('visibility',netLabelsOn?'visible':'hidden');
+  };
+  document.getElementById('btn-reheat').onclick=()=>netSim.alpha(.4).restart();
+}
+
+/* ══════════════════════════════════════════════════════
+   SUNBURST
+══════════════════════════════════════════════════════ */
+function drawSunburst(){
+  const el=document.getElementById('sunburst-svg');
+  const containerW = el.parentElement.clientWidth || 700;
+  const size=Math.min(containerW-64, 600);
+  el.setAttribute('width',size); el.setAttribute('height',size);
+  el.setAttribute('viewBox',`${-size/2} ${-size/2} ${size} ${size}`);
+
+  const svg=d3.select(el); svg.selectAll('*').remove();
+  const R=size/2-10;
+  const topColors=['#fb923c','#fbbf24','#34d399','#38bdf8','#a78bfa'];
+
+  const arc=d3.arc()
+    .startAngle(d=>d.x0).endAngle(d=>d.x1)
+    .padAngle(d=>Math.min((d.x1-d.x0)/2,0.006)).padRadius(R/2)
+    .innerRadius(d=>d.y0*R/3.2).outerRadius(d=>Math.max(d.y0*R/3.2, d.y1*R/3.2 - 1));
+
+  const root=d3.hierarchy(DATA.hierarchy).sum(()=>1);
+  // Capture children order BEFORE sort (sort changes order)
+  d3.partition().size([2*Math.PI, root.height+1])(root);
+  // Build a color map by index position in the children array
+  const childColorMap=new Map();
+  if(root.children) root.children.forEach((c,i)=>childColorMap.set(c,topColors[i]));
+
+  const nodeColor=d=>{
+    let n=d; while(n.depth>1) n=n.parent;
+    return childColorMap.get(n)||topColors[0];
+  };
+
+  root.sort((a,b)=>b.value-a.value);
+  root.each(d=>d.current=d);
+
+  const path=svg.append('g').selectAll('path')
+    .data(root.descendants().slice(1)).enter().append('path')
+    .attr('fill',d=>nodeColor(d))
+    .attr('fill-opacity',d=>d.children?.length?0.85:0.95)
+    .attr('stroke','rgba(6,12,26,.6)').attr('stroke-width',1.5)
+    .attr('d',d=>arc(d.current)).attr('cursor','pointer')
+    .on('mouseover',(e,d)=>ttShow(e,d.data.name,[['Depth',d.depth],['Children',d.children?.length||0]]))
+    .on('mousemove',ttMove).on('mouseout',ttHide)
+    .on('click',clicked);
+
+  const label=svg.append('g').attr('pointer-events','none').attr('text-anchor','middle')
+    .selectAll('text').data(root.descendants().slice(1)).enter().append('text')
+    .attr('dy','0.35em')
+    .attr('fill','#fff')
+    .attr('fill-opacity',d=>+labelOk(d.current))
+    .attr('font-size',d=>d.depth===1?'12px':'10px')
+    .attr('font-weight',d=>d.depth===1?'700':'400')
+    .attr('transform',d=>labelXform(d.current))
+    .text(d=>d.data.name);
+
+  const cCircle=svg.append('circle').attr('r',R/3.2*.62).attr('fill','none').attr('pointer-events','all').on('click',()=>clicked(null,root));
+  const cTxt=svg.append('text').attr('text-anchor','middle').attr('dy','-0.1em').attr('fill','#e2e8f0').attr('font-size','15px').attr('font-weight','800').text('Global');
+  const cSub=svg.append('text').attr('text-anchor','middle').attr('dy','1.3em').attr('fill','#7b8fa8').attr('font-size','11px').text('Supply Chain');
+
+  function clicked(event,p){
+    cCircle.datum(p);
+    root.each(d=>d.target={
+      x0:Math.max(0,Math.min(1,(d.x0-p.x0)/(p.x1-p.x0)))*2*Math.PI,
+      x1:Math.max(0,Math.min(1,(d.x1-p.x0)/(p.x1-p.x0)))*2*Math.PI,
+      y0:Math.max(0,d.y0-p.depth),
+      y1:Math.max(0,d.y1-p.depth)
+    });
+    const t=svg.transition().duration(750);
+    path.transition(t)
+      .tween('data',d=>{const i=d3.interpolate(d.current,d.target);return t=>d.current=i(t);})
+      .attrTween('d',d=>()=>arc(d.current)||'')
+      .attr('fill-opacity',d=>arcOk(d.target)?(d.children?.length?.85:.95):0)
+      .attr('pointer-events',d=>arcOk(d.target)?'auto':'none');
+    label.transition(t)
+      .attr('fill-opacity',d=>+labelOk(d.target))
+      .attrTween('transform',d=>()=>labelXform(d.current));
+    cTxt.text(p.data.name==='Global Supply Chain'?'Global':p.data.name);
+    cSub.text(p.data.name==='Global Supply Chain'?'Supply Chain':`${p.value} nodes`);
+  }
+  function arcOk(d){ return d.y1<=3&&d.y0>=1&&d.x1>d.x0; }
+  function labelOk(d){ return d.y1<=3&&d.y0>=1&&(d.y1-d.y0)*(d.x1-d.x0)>0.04; }
+  function labelXform(d){
+    const x=(d.x0+d.x1)/2*180/Math.PI;
+    const y=(d.y0+d.y1)/2*R/3.2;
+    return `rotate(${x-90}) translate(${y},0) rotate(${x<180?0:180})`;
+  }
+}
+
+/* ══════════════════════════════════════════════════════
+   GEO MAP
+══════════════════════════════════════════════════════ */
+async function drawGeoMap(){
+  const el=document.getElementById('geo-svg');
+  const W=el.parentElement.clientWidth-32, H=480;
+  el.setAttribute('viewBox',`0 0 ${W} ${H}`);
+
+  const svg=d3.select(el); svg.selectAll('*').remove();
+  svg.append('rect').attr('width',W).attr('height',H).attr('fill','#071020').attr('rx',12);
+
+  // Grid lines (latitude/longitude)
+  const graticule=d3.geoGraticule()();
+
+  try {
+    const world=await d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json');
+    const countries=topojson.feature(world,world.objects.countries);
+    const proj=d3.geoNaturalEarth1().fitSize([W,H],countries);
+    const path=d3.geoPath().projection(proj);
+
+    svg.append('path').datum({type:'Sphere'})
+      .attr('d',path).attr('fill','#07122a').attr('stroke','#1a3060').attr('stroke-width',.5);
+
+    svg.append('path').datum(graticule)
+      .attr('d',path).attr('fill','none')
+      .attr('stroke','rgba(56,189,248,.06)').attr('stroke-width',.5);
+
+    svg.append('g').selectAll('path').data(countries.features).enter().append('path')
+      .attr('d',path)
+      .attr('fill','#0e1e3a').attr('stroke','#1c3566').attr('stroke-width',.6);
+
+    const volScale=d3.scaleLinear().domain([1600,2200]).range([2.5,7]);
+
+    let isPaused = false;
+    let speedMult = 1;
+    document.getElementById('btn-anim-play').onclick = (e) => {
+      isPaused = !isPaused;
+      e.target.innerHTML = isPaused ? '▶ Play' : '⏸ Pause';
+    };
+    document.getElementById('btn-anim-speed').onclick = (e) => {
+      speedMult = speedMult === 1 ? 2 : (speedMult === 2 ? 0.5 : 1);
+      e.target.innerHTML = `🏃 ${speedMult}x Speed`;
+    };
+
+    const dots = [];
+
+    DATA.geoflow.forEach((fl,i)=>{
+      const s=proj([fl.sLng,fl.sLat]), t=proj([fl.tLng,fl.tLat]);
+      const dx=t[0]-s[0], dy=t[1]-s[1];
+      const cx=(s[0]+t[0])/2-dy*.4, cy=(s[1]+t[1])/2+dx*.4;
+      const arcD=`M${s[0]},${s[1]} Q${cx},${cy} ${t[0]},${t[1]}`;
+      const col=ROUTE_COLORS[i];
+
+      // Glow
+      svg.append('path').attr('d',arcD).attr('fill','none')
+        .attr('stroke',col).attr('stroke-width',volScale(fl.volume)*2.5).attr('stroke-opacity',.09);
+
+      // Arc
+      const arcEl=svg.append('path').attr('d',arcD).attr('fill','none')
+        .attr('stroke',col).attr('stroke-width',volScale(fl.volume))
+        .attr('stroke-linecap','round').attr('stroke-opacity',0);
+      const L=arcEl.node().getTotalLength();
+      arcEl.attr('stroke-dasharray',L).attr('stroke-dashoffset',L)
+        .transition().duration(1400).delay(i*220)
+        .attr('stroke-opacity',.9).attr('stroke-dashoffset',0);
+
+      // Animated dot
+      const dot=svg.append('circle').attr('r',4).attr('fill',col).attr('opacity',0);
+      dots.push({ el: dot, L: L, arcNode: arcEl.node(), p: -(i*0.1) }); // staggered start
+      // City dots
+      [[s,'#fff'],[t,'#fff']].forEach(([pt,fill])=>{
+        svg.append('circle').attr('cx',pt[0]).attr('cy',pt[1]).attr('r',5)
+          .attr('fill',col).attr('stroke',fill).attr('stroke-width',1.8).attr('opacity',.95);
+      });
+
+      // Labels
+      svg.append('text').attr('x',s[0]).attr('y',s[1]-11)
+        .attr('text-anchor','middle').attr('fill','#e2e8f0').attr('font-size','11px').attr('font-weight','600')
+        .attr('paint-order','stroke').attr('stroke','#071020').attr('stroke-width',3)
+        .text(fl.source);
+      svg.append('text').attr('x',t[0]).attr('y',t[1]-11)
+        .attr('text-anchor','middle').attr('fill','#e2e8f0').attr('font-size','11px').attr('font-weight','600')
+        .attr('paint-order','stroke').attr('stroke','#071020').attr('stroke-width',3)
+        .text(fl.target);
+    });
+
+    let lastTs = performance.now();
+    function loop(ts) {
+      const dt = ts - lastTs;
+      lastTs = ts;
+      if(!isPaused && document.getElementById('sec-geomap').classList.contains('active')) {
+        dots.forEach(d => {
+          d.p += (dt / 2500) * speedMult;
+          if(d.p > 1) d.p -= 1.1; // wrap around with a tiny delay
+          if(d.p >= 0 && d.p <= 1) {
+            d.el.attr('opacity', 1);
+            const pt = d.arcNode.getPointAtLength(d.p * d.L);
+            d.el.attr('transform', `translate(${pt.x},${pt.y})`);
+          } else {
+            d.el.attr('opacity', 0);
+          }
+        });
+      }
+      requestAnimationFrame(loop);
+    }
+    requestAnimationFrame(loop);
+
+    // Legend box
+    const lg=svg.append('g').attr('transform',`translate(16,${H-90})`);
+    lg.append('rect').attr('width',180).attr('height',74).attr('fill','rgba(6,12,26,.82)').attr('rx',8).attr('stroke','rgba(255,255,255,.07)').attr('stroke-width',1);
+    lg.append('text').attr('x',10).attr('y',18).attr('fill','#7b8fa8').attr('font-size','9.5px').attr('font-weight','800').attr('letter-spacing','.1em').text('SHIPMENT ROUTES');
+    DATA.geoflow.forEach((f,i)=>{
+      lg.append('circle').attr('cx',18).attr('cy',34+i*12).attr('r',3.5).attr('fill',ROUTE_COLORS[i]);
+      lg.append('text').attr('x',30).attr('y',38+i*12).attr('fill','#e2e8f0').attr('font-size','9.5px')
+        .text(`${f.source} → ${f.target}  (${f.volume} units)`);
+    });
+
+  } catch(err){
+    svg.append('text').attr('x',W/2).attr('y',H/2).attr('text-anchor','middle')
+      .attr('fill','#f472b6').attr('font-size','14px')
+      .text('⚠ World map requires internet connection.');
+  }
+}
+
+/* ══════════════════════════════════════════════════════
+   SHIPMENTS
+══════════════════════════════════════════════════════ */
+function drawShipments(){
+  // Volume bars
+  {
+    const el=document.getElementById('ship-vol');
+    const W=svgW(el), H=260;
+    el.setAttribute('viewBox',`0 0 ${W} ${H}`);
+    const margin={top:20,right:16,bottom:54,left:52};
+    const iw=W-margin.left-margin.right, ih=H-margin.top-margin.bottom;
+    const svg=d3.select(el); svg.selectAll('*').remove();
+    const g=svg.append('g').attr('transform',`translate(${margin.left},${margin.top})`);
+    const x=d3.scaleBand().domain(DATA.shipments.map(d=>d.route)).range([0,iw]).padding(.3);
+    const y=d3.scaleLinear().domain([0,2600]).nice().range([ih,0]);
+    g.selectAll('line').data(y.ticks(5)).enter().append('line')
+      .attr('x1',0).attr('x2',iw).attr('y1',d=>y(d)).attr('y2',d=>y(d))
+      .attr('stroke','rgba(255,255,255,.045)').attr('stroke-dasharray','4,4');
+    g.selectAll('rect').data(DATA.shipments).enter().append('rect')
+      .attr('x',d=>x(d.route)).attr('width',x.bandwidth())
+      .attr('y',ih).attr('height',0).attr('rx',5)
+      .attr('fill',(_,i)=>ROUTE_COLORS[i]).attr('opacity',.9)
+      .on('mouseover',(e,d)=>ttShow(e,d.route,[['Volume',d.volume+' units'],['Transit',d.days+' days']]))
+      .on('mousemove',ttMove).on('mouseout',ttHide)
+      .transition().duration(850).delay((_,i)=>i*100)
+      .attr('y',d=>y(d.volume)).attr('height',d=>ih-y(d.volume));
+    g.selectAll('text.lv').data(DATA.shipments).enter().append('text').attr('class','lv')
+      .attr('x',d=>x(d.route)+x.bandwidth()/2).attr('y',d=>y(d.volume)-6)
+      .attr('text-anchor','middle').attr('fill','#e2e8f0').attr('font-size','11px').attr('font-weight','700')
+      .text(d=>d.volume);
+    axStyle(g.append('g').attr('transform',`translate(0,${ih})`).call(d3.axisBottom(x).tickSize(0)));
+    g.selectAll('.tick text').attr('fill','#7b8fa8').attr('font-size','10px').attr('dy','1.2em');
+    axStyle(g.append('g').call(d3.axisLeft(y).ticks(5)));
+  }
+
+  // Cost vs Carbon bubble
+  {
+    const el=document.getElementById('ship-cc');
+    const W=svgW(el), H=260;
+    el.setAttribute('viewBox',`0 0 ${W} ${H}`);
+    const margin={top:20,right:16,bottom:50,left:64};
+    const iw=W-margin.left-margin.right, ih=H-margin.top-margin.bottom;
+    const svg=d3.select(el); svg.selectAll('*').remove();
+    const g=svg.append('g').attr('transform',`translate(${margin.left},${margin.top})`);
+    const x=d3.scaleLinear().domain([85000,155000]).range([0,iw]);
+    const y=d3.scaleLinear().domain([145,265]).range([ih,0]);
+    const r=d3.scaleLinear().domain([1600,2200]).range([9,18]);
+    g.selectAll('line').data(y.ticks(4)).enter().append('line')
+      .attr('x1',0).attr('x2',iw).attr('y1',d=>y(d)).attr('y2',d=>y(d))
+      .attr('stroke','rgba(255,255,255,.045)').attr('stroke-dasharray','4,4');
+    g.selectAll('circle').data(DATA.shipments).enter().append('circle')
+      .attr('cx',d=>x(d.cost)).attr('cy',d=>y(d.co2)).attr('r',0)
+      .attr('fill',(_,i)=>ROUTE_COLORS[i]).attr('opacity',.85)
+      .attr('stroke','#fff').attr('stroke-width',1.5)
+      .on('mouseover',(e,d)=>ttShow(e,d.route,[['Cost','$'+d.cost.toLocaleString()],['CO₂',d.co2+' t'],['Volume',d.volume+' units']]))
+      .on('mousemove',ttMove).on('mouseout',ttHide)
+      .transition().duration(700).delay((_,i)=>i*120).attr('r',d=>r(d.volume));
+    g.selectAll('text.lbl').data(DATA.shipments).enter().append('text').attr('class','lbl')
+      .attr('x',d=>x(d.cost)).attr('y',d=>y(d.co2)+4)
+      .attr('text-anchor','middle').attr('fill','#fff').attr('font-size','8.5px').attr('font-weight','700')
+      .attr('pointer-events','none')
+      .text(d=>d.route.split('–')[0]);
+    axStyle(g.append('g').attr('transform',`translate(0,${ih})`).call(d3.axisBottom(x).ticks(4).tickFormat(d=>'$'+d/1000+'k')));
+    axStyle(g.append('g').call(d3.axisLeft(y).ticks(4).tickFormat(d=>d+'t')));
+    g.append('text').attr('x',iw/2).attr('y',ih+42).attr('text-anchor','middle')
+      .attr('fill','#7b8fa8').attr('font-size','11px').text('Transport Cost (USD)');
+    g.append('text').attr('transform','rotate(-90)').attr('x',-ih/2).attr('y',-52)
+      .attr('text-anchor','middle').attr('fill','#7b8fa8').attr('font-size','11px').text('CO₂ Emissions (t)');
+  }
+
+  // Transit days bar (horizontal)
+  {
+    const el=document.getElementById('ship-days');
+    const W=svgW(el), H=160;
+    el.setAttribute('viewBox',`0 0 ${W} ${H}`);
+    const margin={top:14,right:50,bottom:14,left:150};
+    const iw=W-margin.left-margin.right, ih=H-margin.top-margin.bottom;
+    const svg=d3.select(el); svg.selectAll('*').remove();
+    const g=svg.append('g').attr('transform',`translate(${margin.left},${margin.top})`);
+    const y=d3.scaleBand().domain(DATA.shipments.map(d=>d.route)).range([0,ih]).padding(.35);
+    const x=d3.scaleLinear().domain([0,6]).range([0,iw]);
+    // BG
+    g.selectAll('rect.bg').data(DATA.shipments).enter().append('rect')
+      .attr('class','bg').attr('y',d=>y(d.route)).attr('height',y.bandwidth())
+      .attr('x',0).attr('width',iw).attr('fill','rgba(255,255,255,.025)').attr('rx',4);
+    // Bars
+    g.selectAll('rect.db').data(DATA.shipments).enter().append('rect')
+      .attr('class','db').attr('y',d=>y(d.route)).attr('height',y.bandwidth())
+      .attr('x',0).attr('width',0).attr('rx',4)
+      .attr('fill',(_,i)=>ROUTE_COLORS[i]).attr('opacity',.85)
+      .on('mouseover',(e,d)=>ttShow(e,d.route,[['Days',d.days],['Volume',d.volume+' units']]))
+      .on('mousemove',ttMove).on('mouseout',ttHide)
+      .transition().duration(900).delay((_,i)=>i*120)
+      .attr('width',d=>x(d.days));
+    g.selectAll('text.dv').data(DATA.shipments).enter().append('text').attr('class','dv')
+      .attr('x',d=>x(d.days)+7).attr('y',d=>y(d.route)+y.bandwidth()/2)
+      .attr('dy','0.35em').attr('fill','#e2e8f0').attr('font-size','12px').attr('font-weight','700')
+      .text(d=>d.days+' days');
+    axStyle(g.append('g').call(d3.axisLeft(y).tickSize(0)));
+    g.select('.domain').remove();
+    g.selectAll('.tick text').attr('fill','#7b8fa8').attr('font-size','11px').attr('dx','-6');
+  }
+}
+
+/* ══════════════════════════════════════════════════════
+   WAREHOUSES
+══════════════════════════════════════════════════════ */
+function drawWarehouses(){
+  const row=document.getElementById('gauge-row');
+  row.innerHTML='';
+
+  DATA.inventory.forEach((wh,i)=>{
+    const card=document.createElement('div');
+    card.className='chart-card'; card.style.margin='0';
+    const sid=`g${i}`;
+    card.innerHTML=`
+      <div class="cc-title">${wh.warehouse}</div>
+      <div class="cc-sub">Turnover Rate: ${wh.turnover}×/year</div>
+      <svg id="${sid}" style="width:100%;display:block;"></svg>`;
+    row.appendChild(card);
+
+    requestAnimationFrame(()=>{
+      const el=document.getElementById(sid);
+      const sz=Math.min(el.parentElement.clientWidth-48, 220);
+      el.setAttribute('viewBox',`${-sz/2} ${-sz/2-20} ${sz} ${sz+20}`);
+      const svg=d3.select(el);
+      const R=sz/2-18, col=['#38bdf8','#34d399','#a78bfa'][i];
+      const sa=-Math.PI*.75, ea=Math.PI*.75;
+
+      const bgArc=d3.arc().innerRadius(R-16).outerRadius(R)
+        .startAngle(sa).endAngle(ea).cornerRadius(8);
+      svg.append('path').attr('d',bgArc()).attr('fill','rgba(255,255,255,.055)');
+
+      const fg=d3.arc().innerRadius(R-16).outerRadius(R).startAngle(sa).cornerRadius(8);
+      const fgP=svg.append('path').attr('fill',col)
+        .attr('filter',`drop-shadow(0 0 10px ${col}55)`);
+
+      const interp=d3.interpolate(sa, sa+(wh.utilization/100)*(ea-sa));
+      d3.transition().duration(1300).ease(d3.easeCubicOut)
+        .tween('arc',()=>t=>fgP.attr('d',fg.endAngle(interp(t))()));
+
+      svg.append('text').attr('text-anchor','middle').attr('dy','-.1em')
+        .attr('fill',col).attr('font-size','26px').attr('font-weight','900')
+        .text(wh.utilization+'%');
+      svg.append('text').attr('text-anchor','middle').attr('dy','1.4em')
+        .attr('fill','#7b8fa8').attr('font-size','11px').text('Utilization');
+
+      // min/max ticks
+      const tx = Math.sin(ea) * (R + 12);
+      const ty = -Math.cos(ea) * (R + 12);
+      svg.append('text').attr('x',-tx).attr('y',ty).attr('dy','.35em').attr('text-anchor','end')
+        .attr('fill','#7b8fa8').attr('font-size','9px').text('0%');
+      svg.append('text').attr('x',tx).attr('y',ty).attr('dy','.35em').attr('text-anchor','start')
+        .attr('fill','#7b8fa8').attr('font-size','9px').text('100');
+
+      // Mini stat
+      svg.append('text').attr('text-anchor','middle').attr('y',-R+34)
+        .attr('fill','#7b8fa8').attr('font-size','9px')
+        .text(`${(wh.inventory/1000).toFixed(0)}k / ${(wh.capacity/1000).toFixed(0)}k units`);
+    });
+  });
+
+  // Horizontal bar chart
+  const el=document.getElementById('wh-bar');
+  const W=svgW(el), H=210;
+  el.setAttribute('viewBox',`0 0 ${W} ${H}`);
+  const margin={top:16,right:100,bottom:20,left:164};
+  const iw=W-margin.left-margin.right, ih=H-margin.top-margin.bottom;
+  const svg=d3.select(el); svg.selectAll('*').remove();
+  const g=svg.append('g').attr('transform',`translate(${margin.left},${margin.top})`);
+  const y=d3.scaleBand().domain(DATA.inventory.map(d=>d.warehouse)).range([0,ih]).padding(.38);
+  const x=d3.scaleLinear().domain([0,250000]).range([0,iw]);
+
+  g.selectAll('rect.cap').data(DATA.inventory).enter().append('rect')
+    .attr('class','cap').attr('y',d=>y(d.warehouse)).attr('height',y.bandwidth())
+    .attr('x',0).attr('width',d=>x(d.capacity)).attr('fill','rgba(255,255,255,.055)').attr('rx',4);
+
+  g.selectAll('rect.inv').data(DATA.inventory).enter().append('rect')
+    .attr('class','inv').attr('y',d=>y(d.warehouse)).attr('height',y.bandwidth())
+    .attr('x',0).attr('width',0).attr('rx',4)
+    .attr('fill',(_,i)=>['#38bdf8','#34d399','#a78bfa'][i]).attr('opacity',.9)
+    .on('mouseover',(e,d)=>ttShow(e,d.warehouse,[['Inventory',d.inventory.toLocaleString()],['Capacity',d.capacity.toLocaleString()],['Utilization',d.utilization+'%']]))
+    .on('mousemove',ttMove).on('mouseout',ttHide)
+    .transition().duration(1000).delay((_,i)=>i*160).attr('width',d=>x(d.inventory));
+
+  g.selectAll('text.il').data(DATA.inventory).enter().append('text').attr('class','il')
+    .attr('x',d=>x(d.inventory)+8).attr('y',d=>y(d.warehouse)+y.bandwidth()/2)
+    .attr('dy','0.35em').attr('fill','#e2e8f0').attr('font-size','11px').attr('font-weight','600')
+    .text(d=>`${(d.inventory/1000).toFixed(0)}k / ${(d.capacity/1000).toFixed(0)}k`);
+
+  axStyle(g.append('g').call(d3.axisLeft(y).tickSize(0)));
+  g.select('.domain').remove();
+  g.selectAll('.tick text').attr('fill','#7b8fa8').attr('font-size','11px').attr('dx','-6');
+
+  const lgG=g.append('g').attr('transform',`translate(${iw-10},-2)`);
+  [{c:'rgba(255,255,255,.055)',l:'Capacity'},{c:'#38bdf8',l:'Inventory'}].forEach(({c,l},i)=>{
+    lgG.append('rect').attr('x',0).attr('y',i*16).attr('width',10).attr('height',10).attr('rx',2).attr('fill',c);
+    lgG.append('text').attr('x',14).attr('y',i*16+9).attr('fill','#7b8fa8').attr('font-size','10px').text(l);
+  });
+}
+
+/* ══════════════════════════════════════════════════════
+   ROUTES
+══════════════════════════════════════════════════════ */
+function drawRoutes(){
+  // Bubble
+  {
+    const el=document.getElementById('rt-bubble');
+    const W=svgW(el), H=280;
+    el.setAttribute('viewBox',`0 0 ${W} ${H}`);
+    const margin={top:20,right:20,bottom:52,left:70};
+    const iw=W-margin.left-margin.right, ih=H-margin.top-margin.bottom;
+    const svg=d3.select(el); svg.selectAll('*').remove();
+    const g=svg.append('g').attr('transform',`translate(${margin.left},${margin.top})`);
+    const x=d3.scaleLinear().domain([800,4400]).range([0,iw]);
+    const y=d3.scaleLinear().domain([85000,155000]).range([ih,0]);
+    const r=d3.scaleLinear().domain([2,5]).range([13,26]);
+    [[x,'x',iw,ih],[y,'y',iw,ih]].forEach(()=>{});
+    ['x','y'].forEach(()=>{
+      g.selectAll('line.gx').data(x.ticks(5)).enter().append('line')
+        .attr('class','gx').attr('x1',d=>x(d)).attr('x2',d=>x(d)).attr('y1',0).attr('y2',ih)
+        .attr('stroke','rgba(255,255,255,.038)').attr('stroke-dasharray','4,4');
+      g.selectAll('line.gy').data(y.ticks(5)).enter().append('line')
+        .attr('class','gy').attr('x1',0).attr('x2',iw).attr('y1',d=>y(d)).attr('y2',d=>y(d))
+        .attr('stroke','rgba(255,255,255,.038)').attr('stroke-dasharray','4,4');
+    });
+    g.selectAll('circle').data(DATA.routes).enter().append('circle')
+      .attr('cx',d=>x(d.dist)).attr('cy',d=>y(d.cost)).attr('r',0)
+      .attr('fill',(_,i)=>ROUTE_COLORS[i]).attr('opacity',.85)
+      .attr('stroke','rgba(255,255,255,.3)').attr('stroke-width',1.5)
+      .attr('filter',(_,i)=>`drop-shadow(0 0 8px ${ROUTE_COLORS[i]}55)`)
+      .on('mouseover',(e,d)=>ttShow(e,d.route,[['Distance',d.dist+' km'],['Cost','$'+d.cost.toLocaleString()],['Days',d.days],['Risk',d.risk]]))
+      .on('mousemove',ttMove).on('mouseout',ttHide)
+      .transition().duration(750).delay((_,i)=>i*150).attr('r',d=>r(d.days));
+    g.selectAll('text.dl').data(DATA.routes).enter().append('text').attr('class','dl')
+      .attr('x',d=>x(d.dist)).attr('y',d=>y(d.cost)+4).attr('text-anchor','middle')
+      .attr('fill','#fff').attr('font-size','9.5px').attr('font-weight','800').attr('pointer-events','none')
+      .text(d=>d.days+'d');
+    axStyle(g.append('g').attr('transform',`translate(0,${ih})`).call(d3.axisBottom(x).ticks(5).tickFormat(d=>d/1000+'k km')));
+    axStyle(g.append('g').call(d3.axisLeft(y).ticks(4).tickFormat(d=>'$'+d/1000+'k')));
+    g.append('text').attr('x',iw/2).attr('y',ih+44).attr('text-anchor','middle')
+      .attr('fill','#7b8fa8').attr('font-size','11px').text('Distance (km)  ·  Bubble size = delivery days');
+    g.append('text').attr('transform','rotate(-90)').attr('x',-ih/2).attr('y',-58)
+      .attr('text-anchor','middle').attr('fill','#7b8fa8').attr('font-size','11px').text('Cost (USD)');
+  }
+
+  // Risk bar
+  {
+    const el=document.getElementById('rt-risk');
+    const W=svgW(el), H=280;
+    el.setAttribute('viewBox',`0 0 ${W} ${H}`);
+    const margin={top:20,right:20,bottom:70,left:24};
+    const iw=W-margin.left-margin.right, ih=H-margin.top-margin.bottom;
+    const svg=d3.select(el); svg.selectAll('*').remove();
+    const g=svg.append('g').attr('transform',`translate(${margin.left},${margin.top})`);
+    const sorted=[...DATA.routes].sort((a,b)=>a.risk-b.risk);
+    const x=d3.scaleBand().domain(sorted.map(d=>d.route)).range([0,iw]).padding(.3);
+    const y=d3.scaleLinear().domain([0,18]).nice().range([ih,0]);
+
+    // Risk zones
+    [{y1:0,y2:8,c:'rgba(52,211,153,.06)'},{y1:8,y2:12,c:'rgba(251,191,36,.06)'},{y1:12,y2:18,c:'rgba(244,114,182,.06)'}]
+      .forEach(z=>g.append('rect').attr('x',0).attr('width',iw).attr('y',y(z.y2)).attr('height',y(z.y1)-y(z.y2)).attr('fill',z.c));
+
+    g.selectAll('rect.rb').data(sorted).enter().append('rect').attr('class','rb')
+      .attr('x',d=>x(d.route)).attr('width',x.bandwidth())
+      .attr('y',ih).attr('height',0).attr('rx',5)
+      .attr('fill',d=>d.risk<=8?'#34d399':d.risk<=12?'#fbbf24':'#f472b6').attr('opacity',.9)
+      .on('mouseover',(e,d)=>ttShow(e,d.route,[['Risk',d.risk],['Level',d.risk<=8?'Low':d.risk<=12?'Medium':'High']]))
+      .on('mousemove',ttMove).on('mouseout',ttHide)
+      .transition().duration(850).delay((_,i)=>i*120)
+      .attr('y',d=>y(d.risk)).attr('height',d=>ih-y(d.risk));
+    g.selectAll('text.rv').data(sorted).enter().append('text').attr('class','rv')
+      .attr('x',d=>x(d.route)+x.bandwidth()/2).attr('y',d=>y(d.risk)-6)
+      .attr('text-anchor','middle').attr('fill','#e2e8f0').attr('font-size','13px').attr('font-weight','800')
+      .text(d=>d.risk);
+    axStyle(g.append('g').attr('transform',`translate(0,${ih})`).call(d3.axisBottom(x).tickSize(0)));
+    g.selectAll('.tick text').attr('fill','#7b8fa8').attr('font-size','9px')
+      .style('text-anchor','end').attr('transform','rotate(-28)').attr('dx','-4').attr('dy','4');
+    g.select('.domain').remove();
+    axStyle(g.append('g').call(d3.axisLeft(y).ticks(6)));
+  }
+
+  // Table
+  document.getElementById('rt-tbody').innerHTML=DATA.routes.map(r=>{
+    const cls=r.risk<=8?'r-low':r.risk<=12?'r-med':'r-hi';
+    const lbl=r.risk<=8?'Low':r.risk<=12?'Medium':'High';
+    return `<tr>
+      <td style="font-weight:600">${r.route}</td>
+      <td>${r.dist.toLocaleString()}</td>
+      <td>$${r.cost.toLocaleString()}</td>
+      <td>${r.days}</td>
+      <td><span class="risk-badge ${cls}">${r.risk} · ${lbl}</span></td>
+    </tr>`;
+  }).join('');
+}
+
+/* ══════════════════════════════════════════════════════
+   SUSTAINABILITY
+══════════════════════════════════════════════════════ */
+function drawSustainability(){
+  const el = document.getElementById('sus-area');
+  const W = svgW(el), H = 400;
+  const margin = {top:30, right:30, bottom:40, left:60};
+  const iw = W - margin.left - margin.right;
+  const ih = H - margin.top - margin.bottom;
+  el.setAttribute('viewBox', `0 0 ${W} ${H}`);
+
+  const svg = d3.select(el);
+  const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+
+  const keys = ["RawMaterial", "Manufacturing", "Transport"];
+  const colors = ["#fbbf24", "#34d399", "#22d3ee"];
+  
+  const stack = d3.stack().keys(keys);
+  const stackedData = stack(DATA.sustainability);
+
+  const x = d3.scalePoint()
+    .domain(DATA.sustainability.map(d => d.month))
+    .range([0, iw]);
+
+  const y = d3.scaleLinear()
+    .domain([0, d3.max(stackedData, d => d3.max(d, d => d[1])) * 1.1])
+    .range([ih, 0]);
+
+  const area = d3.area()
+    .x(d => x(d.data.month))
+    .y0(d => y(d[0]))
+    .y1(d => y(d[1]))
+    .curve(d3.curveMonotoneX);
+
+  axStyle(g.append('g').attr('transform', `translate(0,${ih})`).call(d3.axisBottom(x)));
+  g.select('.domain').remove();
+  axStyle(g.append('g').call(d3.axisLeft(y).ticks(6)));
+
+  g.selectAll("mylayers")
+    .data(stackedData)
+    .join("path")
+      .style("fill", (d,i) => colors[i])
+      .attr("d", area)
+      .attr("opacity", 0)
+      .transition().duration(1000).delay((d,i) => i*200)
+      .attr("opacity", 0.85);
+
+  // Legend
+  const lg = svg.append('g').attr('transform', `translate(${W/2 - 120}, 10)`);
+  keys.forEach((k,i) => {
+    lg.append('circle').attr('cx', i*100).attr('cy', 0).attr('r', 5).attr('fill', colors[i]);
+    lg.append('text').attr('x', i*100 + 10).attr('y', 4).text(k).attr('fill', '#e2e8f0').attr('font-size', '11px');
+  });
+}
+
+/* ══════════════════════════════════════════════════════
+   SUPPLIERS
+══════════════════════════════════════════════════════ */
+function drawSuppliers(){
+  const el = document.getElementById('sup-radar');
+  const W = svgW(el), H = 650;
+  const margin = 80;
+  const radius = Math.min(W, H) / 2 - margin;
+  el.setAttribute('viewBox', `0 0 ${W} ${H}`);
+
+  const svg = d3.select(el);
+  const g = svg.append('g').attr('transform', `translate(${W/2},${H/2})`);
+
+  const features = ["quality", "speed", "cost", "compliance", "reliability"];
+  const rScale = d3.scaleLinear().range([0, radius]).domain([0, 100]);
+  const angleScale = d3.scaleBand().range([0, 2 * Math.PI]).domain(features);
+
+  // Draw concentric circles
+  [20, 40, 60, 80, 100].forEach(t => {
+    g.append('circle').attr('r', rScale(t)).attr('fill', 'none').attr('stroke', 'rgba(255,255,255,.1)');
+    g.append('text').attr('x', 4).attr('y', -rScale(t)-2).text(t).attr('fill', '#7b8fa8').attr('font-size', '10px');
+  });
+
+  // Draw axes
+  features.forEach(f => {
+    const a = angleScale(f) - Math.PI/2;
+    g.append('line')
+      .attr('x1', 0).attr('y1', 0)
+      .attr('x2', rScale(100) * Math.cos(a))
+      .attr('y2', rScale(100) * Math.sin(a))
+      .attr('stroke', 'rgba(255,255,255,.1)');
+    g.append('text')
+      .attr('x', rScale(110) * Math.cos(a))
+      .attr('y', rScale(110) * Math.sin(a))
+      .attr('text-anchor', 'middle')
+      .attr('fill', '#e2e8f0').attr('font-size', '12px').attr('font-weight', '600')
+      .text(f.toUpperCase());
+  });
+
+  const color = d3.scaleOrdinal(d3.schemeCategory10);
+  const line = d3.lineRadial()
+    .angle(d => angleScale(d.axis))
+    .radius(d => rScale(d.value))
+    .curve(d3.curveLinearClosed);
+
+  DATA.suppliers.forEach((d, i) => {
+    const coords = features.map(f => ({axis: f, value: d[f]}));
+    
+    g.append('path')
+      .datum(coords)
+      .attr('d', line)
+      .attr('fill', color(i))
+      .attr('fill-opacity', 0.2)
+      .attr('stroke', color(i))
+      .attr('stroke-width', 2)
+      .on('mouseover', function(e) {
+        d3.select(this).attr('fill-opacity', 0.7);
+        ttShow(e, d.supplier, features.map(f => [f, d[f]]));
+      })
+      .on('mousemove', ttMove)
+      .on('mouseout', function() {
+        d3.select(this).attr('fill-opacity', 0.2);
+        ttHide();
+      });
+  });
+}
+
+/* ══════════════════════════════════════════════════════
+   INCIDENTS
+══════════════════════════════════════════════════════ */
+function drawIncidents(){
+  document.getElementById('inc-tbody').innerHTML = DATA.incidents.map(inc => {
+    const cls = inc.severity === 'Critical' ? 'r-hi' : inc.severity === 'High' ? 'r-hi' : inc.severity === 'Medium' ? 'r-med' : 'r-low';
+    return `<tr>
+      <td style="font-weight:600">${inc.id}</td>
+      <td>${inc.title}</td>
+      <td>${inc.type}</td>
+      <td>${inc.location}</td>
+      <td>${inc.impact}</td>
+      <td><span class="risk-badge ${cls}">${inc.status}</span></td>
+    </tr>`;
+  }).join('');
+}
+
+// Global Alert Ticker
+function initAlertTicker() {
+  if (!DATA.incidents || DATA.incidents.length === 0) return;
+  const activeAlerts = DATA.incidents.filter(d => d.status === 'Active' || d.status === 'Monitoring');
+  if (activeAlerts.length === 0) return;
+
+  const tickerDiv = document.createElement('div');
+  tickerDiv.style.cssText = "background: rgba(244, 114, 182, 0.15); color: #f472b6; padding: 6px 48px; font-size: 12px; font-weight: 600; text-align: center; border-bottom: 1px solid rgba(244, 114, 182, 0.3); display: flex; align-items: center; justify-content: center; gap: 12px;";
+  tickerDiv.innerHTML = `<span style="animation: pulse 1.5s infinite">⚠️ LIVE ALERTS:</span> <marquee scrollamount="5" style="width: 50%; max-width: 600px;">${activeAlerts.map(a => `[${a.severity.toUpperCase()}] ${a.title} - ${a.impact}`).join(' &nbsp;&nbsp;|&nbsp;&nbsp; ')}</marquee>`;
+  document.querySelector('header').parentNode.insertBefore(tickerDiv, document.querySelector('header'));
+}
+
+/* ══════════════════════════════════════════════════════
+   FORECASTING
+══════════════════════════════════════════════════════ */
+function drawForecasting(){
+  const el = document.getElementById('for-line');
+  const W = svgW(el), H = 400;
+  const margin = {top:30, right:30, bottom:40, left:60};
+  const iw = W - margin.left - margin.right;
+  const ih = H - margin.top - margin.bottom;
+  el.setAttribute('viewBox', `0 0 ${W} ${H}`);
+
+  const svg = d3.select(el);
+  const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+
+  const x = d3.scalePoint().domain(DATA.forecasting.map(d => d.quarter)).range([0, iw]);
+  const y = d3.scaleLinear().domain([10000, 25000]).range([ih, 0]);
+
+  axStyle(g.append('g').attr('transform', `translate(0,${ih})`).call(d3.axisBottom(x)));
+  g.select('.domain').remove();
+  axStyle(g.append('g').call(d3.axisLeft(y).ticks(6)));
+
+  // Grid lines
+  g.append("g").attr("class", "grid").style("stroke-dasharray", "3,3").style("opacity", 0.1)
+    .call(d3.axisLeft(y).tickSize(-iw).tickFormat(""));
+
+  // Confidence Interval Area
+  const cfData = DATA.forecasting.filter(d => d.lower !== null);
+  const area = d3.area()
+    .x(d => x(d.quarter))
+    .y0(d => y(d.lower))
+    .y1(d => y(d.upper))
+    .curve(d3.curveMonotoneX);
+
+  g.append('path')
+    .datum(cfData)
+    .attr('fill', 'rgba(34, 211, 238, 0.15)')
+    .attr('d', area)
+    .attr('opacity', 0)
+    .transition().duration(1000)
+    .attr('opacity', 1);
+
+  // Historical Line
+  const histData = DATA.forecasting.filter(d => d.historical !== null);
+  const lineHist = d3.line().x(d => x(d.quarter)).y(d => y(d.historical)).curve(d3.curveMonotoneX);
+  const ph = g.append('path').datum(histData).attr('fill', 'none').attr('stroke', '#a78bfa').attr('stroke-width', 3).attr('d', lineHist);
+  const lenH = ph.node().getTotalLength();
+  ph.attr('stroke-dasharray', lenH).attr('stroke-dashoffset', lenH).transition().duration(1000).attr('stroke-dashoffset', 0);
+
+  // Forecast Line
+  const fcData = DATA.forecasting.filter(d => d.forecast !== null);
+  const lineFc = d3.line().x(d => x(d.quarter)).y(d => y(d.forecast)).curve(d3.curveMonotoneX);
+  const pf = g.append('path').datum(fcData).attr('fill', 'none').attr('stroke', '#22d3ee').attr('stroke-width', 3).style("stroke-dasharray", ("6, 4")).attr('d', lineFc);
+  const lenF = pf.node().getTotalLength();
+  pf.attr('stroke-dashoffset', lenF).transition().duration(1000).delay(1000).attr('stroke-dashoffset', 0);
+
+  // Legend
+  const lg = svg.append('g').attr('transform', `translate(${W/2 - 120}, 10)`);
+  lg.append('line').attr('x1', 0).attr('y1', 0).attr('x2', 20).attr('y2', 0).attr('stroke', '#a78bfa').attr('stroke-width', 3);
+  lg.append('text').attr('x', 25).attr('y', 4).text("Historical").attr('fill', '#e2e8f0').attr('font-size', '11px');
+  lg.append('line').attr('x1', 100).attr('y1', 0).attr('x2', 120).attr('y2', 0).attr('stroke', '#22d3ee').attr('stroke-width', 3).style("stroke-dasharray", "4,2");
+  lg.append('text').attr('x', 125).attr('y', 4).text("Forecast").attr('fill', '#e2e8f0').attr('font-size', '11px');
+  lg.append('rect').attr('x', 190).attr('y', -5).attr('width', 15).attr('height', 10).attr('fill', 'rgba(34, 211, 238, 0.2)');
+  lg.append('text').attr('x', 210).attr('y', 4).text("95% Confidence").attr('fill', '#e2e8f0').attr('font-size', '11px');
+}
+
+/* ══════════════════════════════════════════════════════
+   INIT
+══════════════════════════════════════════════════════ */
+buildKPIs();
+buildOverviewBar();
+buildOverviewScatter();
+initAlertTicker();
+
+window.addEventListener('resize', ()=>{
+  buildOverviewBar();
+  buildOverviewScatter();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+[
+  {
+    "source":"Shanghai",
+    "sourceLat":31.2304,
+    "sourceLng":121.4737,
+    "target":"Singapore",
+    "targetLat":1.3521,
+    "targetLng":103.8198,
+    "volume":1800
+  },
+  {
+    "source":"Mumbai",
+    "sourceLat":19.0760,
+    "sourceLng":72.8777,
+    "target":"Dubai",
+    "targetLat":25.2048,
+    "targetLng":55.2708,
+    "volume":1600
+  },
+  {
+    "source":"Ho Chi Minh City",
+    "sourceLat":10.8231,
+    "sourceLng":106.6297,
+    "target":"Singapore",
+    "targetLat":1.3521,
+    "targetLng":103.8198,
+    "volume":2200
+  },
+  {
+    "source":"Monterrey",
+    "sourceLat":25.6866,
+    "sourceLng":-100.3161,
+    "target":"Chicago",
+    "targetLat":41.8781,
+    "targetLng":-87.6298,
+    "volume":1700
+  }
+]

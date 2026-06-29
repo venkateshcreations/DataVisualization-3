@@ -1,0 +1,14 @@
+[
+  { "month": "Jan", "RawMaterial": 140, "Manufacturing": 320, "Transport": 250 },
+  { "month": "Feb", "RawMaterial": 145, "Manufacturing": 310, "Transport": 260 },
+  { "month": "Mar", "RawMaterial": 130, "Manufacturing": 290, "Transport": 240 },
+  { "month": "Apr", "RawMaterial": 125, "Manufacturing": 280, "Transport": 220 },
+  { "month": "May", "RawMaterial": 120, "Manufacturing": 270, "Transport": 210 },
+  { "month": "Jun", "RawMaterial": 115, "Manufacturing": 260, "Transport": 190 },
+  { "month": "Jul", "RawMaterial": 110, "Manufacturing": 255, "Transport": 185 },
+  { "month": "Aug", "RawMaterial": 105, "Manufacturing": 240, "Transport": 170 },
+  { "month": "Sep", "RawMaterial": 100, "Manufacturing": 230, "Transport": 160 },
+  { "month": "Oct", "RawMaterial": 95,  "Manufacturing": 220, "Transport": 150 },
+  { "month": "Nov", "RawMaterial": 90,  "Manufacturing": 210, "Transport": 140 },
+  { "month": "Dec", "RawMaterial": 85,  "Manufacturing": 200, "Transport": 130 }
+]

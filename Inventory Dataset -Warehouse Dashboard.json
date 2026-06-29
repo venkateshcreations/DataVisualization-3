@@ -1,0 +1,23 @@
+[
+  {
+    "warehouse":"Asia Warehouse",
+    "inventory":125000,
+    "capacity":150000,
+    "utilization":83,
+    "turnoverRate":12
+  },
+  {
+    "warehouse":"Europe Warehouse",
+    "inventory":185000,
+    "capacity":220000,
+    "utilization":84,
+    "turnoverRate":10
+  },
+  {
+    "warehouse":"North America Warehouse",
+    "inventory":145000,
+    "capacity":180000,
+    "utilization":81,
+    "turnoverRate":9
+  }
+]

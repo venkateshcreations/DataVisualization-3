@@ -1,0 +1,38 @@
+{
+  "nodes":[
+    {"id":"Steel","group":"RawMaterial"},
+    {"id":"Aluminum","group":"RawMaterial"},
+    {"id":"Semiconductors","group":"RawMaterial"},
+
+    {"id":"China Plant","group":"Manufacturing"},
+    {"id":"India Plant","group":"Manufacturing"},
+    {"id":"Vietnam Plant","group":"Manufacturing"},
+
+    {"id":"Singapore DC","group":"Distribution"},
+    {"id":"Dubai DC","group":"Distribution"},
+    {"id":"Chicago DC","group":"Distribution"},
+
+    {"id":"Asia Warehouse","group":"Warehouse"},
+    {"id":"Europe Warehouse","group":"Warehouse"},
+
+    {"id":"Retail Asia","group":"Retail"},
+    {"id":"Retail Europe","group":"Retail"},
+    {"id":"Retail USA","group":"Retail"}
+  ],
+
+  "links":[
+    {"source":"Steel","target":"China Plant"},
+    {"source":"Aluminum","target":"China Plant"},
+    {"source":"Semiconductors","target":"Vietnam Plant"},
+
+    {"source":"China Plant","target":"Singapore DC"},
+    {"source":"India Plant","target":"Dubai DC"},
+    {"source":"Vietnam Plant","target":"Singapore DC"},
+
+    {"source":"Singapore DC","target":"Asia Warehouse"},
+    {"source":"Dubai DC","target":"Europe Warehouse"},
+
+    {"source":"Asia Warehouse","target":"Retail Asia"},
+    {"source":"Europe Warehouse","target":"Retail Europe"}
+  ]
+}

@@ -1,0 +1,30 @@
+[
+  {
+    "route":"Shanghai → Singapore",
+    "distanceKm":3800,
+    "costUSD":120000,
+    "deliveryDays":4,
+    "riskScore":12
+  },
+  {
+    "route":"Mumbai → Dubai",
+    "distanceKm":1900,
+    "costUSD":98000,
+    "deliveryDays":3,
+    "riskScore":8
+  },
+  {
+    "route":"Ho Chi Minh → Singapore",
+    "distanceKm":1100,
+    "costUSD":105000,
+    "deliveryDays":2,
+    "riskScore":6
+  },
+  {
+    "route":"Monterrey → Chicago",
+    "distanceKm":2100,
+    "costUSD":145000,
+    "deliveryDays":5,
+    "riskScore":14
+  }
+]

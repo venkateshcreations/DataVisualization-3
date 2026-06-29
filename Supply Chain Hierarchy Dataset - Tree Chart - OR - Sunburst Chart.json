@@ -1,0 +1,67 @@
+{
+  "name": "Global Supply Chain",
+  "children": [
+    {
+      "name": "Raw Materials",
+      "children": [
+        {
+          "name": "Metals",
+          "children": [
+            {"name": "Steel"},
+            {"name": "Aluminum"},
+            {"name": "Copper"}
+          ]
+        },
+        {
+          "name": "Plastics",
+          "children": [
+            {"name": "Polyethylene"},
+            {"name": "Polypropylene"}
+          ]
+        },
+        {
+          "name": "Electronics Components",
+          "children": [
+            {"name": "Semiconductors"},
+            {"name": "Sensors"},
+            {"name": "Circuit Boards"}
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Manufacturing Plants",
+      "children": [
+        {"name": "China Plant"},
+        {"name": "India Plant"},
+        {"name": "Vietnam Plant"},
+        {"name": "Mexico Plant"}
+      ]
+    },
+    {
+      "name": "Distribution Centers",
+      "children": [
+        {"name": "Singapore DC"},
+        {"name": "Dubai DC"},
+        {"name": "Rotterdam DC"},
+        {"name": "Chicago DC"}
+      ]
+    },
+    {
+      "name": "Regional Warehouses",
+      "children": [
+        {"name": "Asia Warehouse"},
+        {"name": "Europe Warehouse"},
+        {"name": "North America Warehouse"}
+      ]
+    },
+    {
+      "name": "Retail Stores",
+      "children": [
+        {"name": "Store Network Asia"},
+        {"name": "Store Network Europe"},
+        {"name": "Store Network US"}
+      ]
+    }
+  ]
+}

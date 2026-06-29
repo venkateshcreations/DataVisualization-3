@@ -1,0 +1,42 @@
+[
+  {
+    "supplier": "TechMetals Inc (Steel)",
+    "quality": 92,
+    "speed": 85,
+    "cost": 75,
+    "compliance": 98,
+    "reliability": 88
+  },
+  {
+    "supplier": "AluSource Global (Aluminum)",
+    "quality": 85,
+    "speed": 94,
+    "cost": 82,
+    "compliance": 90,
+    "reliability": 85
+  },
+  {
+    "supplier": "CopEx Mining (Copper)",
+    "quality": 78,
+    "speed": 75,
+    "cost": 95,
+    "compliance": 82,
+    "reliability": 70
+  },
+  {
+    "supplier": "Silico Semi (Semiconductors)",
+    "quality": 98,
+    "speed": 70,
+    "cost": 65,
+    "compliance": 100,
+    "reliability": 95
+  },
+  {
+    "supplier": "SensoryTech (Sensors)",
+    "quality": 88,
+    "speed": 92,
+    "cost": 80,
+    "compliance": 85,
+    "reliability": 90
+  }
+]

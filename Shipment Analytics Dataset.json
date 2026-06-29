@@ -1,0 +1,30 @@
+[
+  {
+    "route":"Shanghai-Singapore",
+    "shipmentVolume":1800,
+    "transitDays":4,
+    "transportCost":120000,
+    "carbonEmission":220
+  },
+  {
+    "route":"Mumbai-Dubai",
+    "shipmentVolume":1600,
+    "transitDays":3,
+    "transportCost":98000,
+    "carbonEmission":180
+  },
+  {
+    "route":"Vietnam-Singapore",
+    "shipmentVolume":2200,
+    "transitDays":2,
+    "transportCost":105000,
+    "carbonEmission":160
+  },
+  {
+    "route":"Mexico-Chicago",
+    "shipmentVolume":1700,
+    "transitDays":5,
+    "transportCost":145000,
+    "carbonEmission":250
+  }
+]

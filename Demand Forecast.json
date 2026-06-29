@@ -1,0 +1,11 @@
+[
+  { "quarter": "Q1 2023", "historical": 12000, "forecast": null, "lower": null, "upper": null },
+  { "quarter": "Q2 2023", "historical": 13500, "forecast": null, "lower": null, "upper": null },
+  { "quarter": "Q3 2023", "historical": 15000, "forecast": null, "lower": null, "upper": null },
+  { "quarter": "Q4 2023", "historical": 18500, "forecast": null, "lower": null, "upper": null },
+  { "quarter": "Q1 2024", "historical": 14000, "forecast": 14000, "lower": 14000, "upper": 14000 },
+  { "quarter": "Q2 2024", "historical": null, "forecast": 15200, "lower": 14800, "upper": 15600 },
+  { "quarter": "Q3 2024", "historical": null, "forecast": 16800, "lower": 15500, "upper": 18100 },
+  { "quarter": "Q4 2024", "historical": null, "forecast": 20500, "lower": 18000, "upper": 23000 },
+  { "quarter": "Q1 2025", "historical": null, "forecast": 16000, "lower": 13000, "upper": 19000 }
+]
